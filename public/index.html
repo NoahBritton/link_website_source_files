@@ -11,6 +11,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     
     <link href="css/index.css" rel="stylesheet">
+    <script type="text/javascript">
+      var imgs = ['01.jpg','02.jpg','03.jpg','04.jpg','05.jpg',
+          '05.jpg','06.jpg','07.jpg','08.jpg','09.jpg',
+          '10.jpg'];
+      function getRandomImage() {
+        var rnd = Math.floor(Math.random()*imgs.length);
+        document.getElementById("slide").src= ("./img/" + imgs[rnd])
+      }
+    </script>
   </head>
 
   <body onload="getRandomImage()">
@@ -55,7 +64,7 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img class="first-slide" src="./img/01.jpg" alt="First slide">
+            <img class="first-slide" src="" id="slide">
             <div class="container">
               <div class="carousel-caption text-left">
                 <h1>A website that doesn't exist</h1>
@@ -69,7 +78,7 @@
             <div class="container">
               <div class="carousel-caption text-left">
                 <h1>Another website that hasn't been made yet</h1>
-                <p>Ok, so, take the really cool website you just imagined and double the cool factor by like... 12... yeah thats a good number.</p>
+                <p>Ok, so, take the really cool website you just imagined and double the cool factor by like... 12... <i>yeah, thats a good number</i>.</p>
                 <p><a class="btn btn-lg btn-primary" href="#" role="button">[REDACTED]</a></p>
               </div>
             </div>
@@ -101,15 +110,6 @@
         <span class="text-muted">blah blah blah...</span>
       </div>
     </footer>
-      <script type="text/javascript">
-        var imgs = ['01.jpg','02.jpg','03.jpg','04.jpg','05.jpg',
-            '05.jpg','06.jpg','07.jpg','08.jpg','09.jpg',
-            '10.jpg'];
-        function getRandomImage() {
-          var rnd = Math.floor(Math.random()*imgs.length);
-          document.getElementsByClassName("first-slide").innerHTML.src = ('./img/' + imgs[rnd])
-        }
-  </script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
