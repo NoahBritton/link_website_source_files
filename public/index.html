@@ -13,11 +13,15 @@
     <link href="css/index.css" rel="stylesheet">
     <script type="text/javascript">
       var imgs = ['01.jpg','02.jpg','03.jpg','04.jpg','05.jpg',
-          '05.jpg','06.jpg','07.jpg','08.jpg','09.jpg',
+          '05.jpg','06.jpg','08.jpg','09.jpg',
           '10.jpg'];
       function getRandomImage() {
-        var rnd = Math.floor(Math.random()*imgs.length);
-        document.getElementById("slide").src= ("./img/" + imgs[rnd])
+        var rnd1 = Math.floor(Math.random()*imgs.length);
+        var rnd3 = Math.floor(Math.random()*imgs.length);
+        var rnd2 = Math.floor(Math.random()*imgs.length);
+        document.getElementById("slide1").src= ("./img/" + imgs[rnd1])
+        document.getElementById("slide2").src= ("./img/" + imgs[rnd2])
+        document.getElementById("slide3").src= ("./img/" + imgs[rnd3])
       }
     </script>
   </head>
@@ -64,7 +68,7 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img class="first-slide" src="" id="slide">
+            <img class="first-slide" src="" id="slide1" alt="First">
             <div class="container">
               <div class="carousel-caption text-left">
                 <h1>A website that doesn't exist</h1>
@@ -74,7 +78,7 @@
             </div>
           </div>
           <div class="carousel-item">
-            <img class="second-slide" src="./img/02.jpg" alt="Second slide">
+            <img class="second-slide" src="" id="slide2" alt="Second slide">
             <div class="container">
               <div class="carousel-caption text-left">
                 <h1>Another website that hasn't been made yet</h1>
@@ -84,7 +88,7 @@
             </div>
           </div>
           <div class="carousel-item">
-            <img class="third-slide" src="./img/03.jpg" alt="Third slide">
+            <img class="third-slide" src="" id="slide3" alt="Third slide">
             <div class="container">
               <div class="carousel-caption text-left">
                 <h1>A website that will never be made</h1>
