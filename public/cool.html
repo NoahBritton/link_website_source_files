@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+  <meta name="description" content="A secret easter egg">
+  <meta name="author" content="Noah Britton">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Somethin' cool</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="js/cool.js"></script>
+  <script src="js/colorPicker.js"></script>
+  <link href="css/cool.css" rel="stylesheet">
+  <link href="css/index.css" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="index.html">n0ahcode.net</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="cool.html">Something Cool <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+        <form class="form-inline mt-2 mt-md-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+  </header>
+  <main role="main" class="container">
+    <h1 class="mt-5">Something I thought was cool</h1>
+    <p class="lead">Just a cool animation done with css and javascript that I got from <a href="https://webkit.org/blog-files/3d-transforms/morphing-cubes.html" target="_blank">here</a>, not sure what exactly you'd use this for.</p> 
+    <p class="lead">As a little challenge for myself, I added buttons that let you change the color of the text and the face (it took me longer to get those working than I care to admit).</p>
+    <p class="lead">Yeah, not much to it, it's just kinda fun to look at.</p>
+    <br>
+    <div><button onclick="toggleShape()">Toggle Shape</button></div>
+    <div><input type="checkbox" id="backfaces" onclick="toggleBackfaces()" checked><label for="backfaces">Backfaces visible</label></div>
+    <br>
+    <button type="button" onclick="changeTextColor()">Change Text Color</button> <input type="color" id="textColor" value="#000000">
+    <br>
+    <button type="button" onclick="changeFaceColor()">Change Face Color</button> <input type="color" id="faceColor" value="#000000">
+    <br>
+    <br>
+    <br>
+    <div id="container">
+      <div id="stage" style>
+        <div id="shape" class=" backfaces  cube">
+          <div class="plane one" id="one">1</div>
+          <div class="plane two" id="two">2</div>
+          <div class="plane three" id="three">3</div>
+          <div class="plane four" id="four">4</div>
+          <div class="plane five" id="five">5</div>
+          <div class="plane six" id="six">6</div>
+          <div class="plane seven" id="seven">7</div>
+          <div class="plane eight" id="eight">8</div>
+          <div class="plane nine" id="nine">9</div>
+          <div class="plane ten" id="ten">10</div>
+          <div class="plane eleven" id="eleven">11</div>
+          <div class="plane twelve" id="twelve">12</div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- footer -->
+  <footer class="footer">
+    <div class="container">
+      <span class="text-muted">blah blah blah...</span>
+      <div><input class="visually-hidden" type="checkbox" id="huh" onclick="toggleHuh()" unchecked><label for="huh"><span class="text-muted">huh?</span></label></div>
+    </div>
+  </footer>
+</body>
+</html>

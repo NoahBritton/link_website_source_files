@@ -1,1 +1,5 @@
 node_modules/
+public/php/
+secret.html
+public/js/keypad.js
+public/css/keypad.css
