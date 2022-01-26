@@ -10,20 +10,8 @@
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     
-    <link href="css/index.css" rel="stylesheet">
-    <script type="text/javascript">
-      var imgs = ['01.jpg','02.jpg','03.jpg','04.jpg','05.jpg',
-          '05.jpg','06.jpg','08.jpg','09.jpg',
-          '10.jpg'];
-      function getRandomImage() {
-        var rnd1 = Math.floor(Math.random()*imgs.length);
-        var rnd3 = Math.floor(Math.random()*imgs.length);
-        var rnd2 = Math.floor(Math.random()*imgs.length);
-        document.getElementById("slide1").src= ("./img/" + imgs[rnd1])
-        document.getElementById("slide2").src= ("./img/" + imgs[rnd2])
-        document.getElementById("slide3").src= ("./img/" + imgs[rnd3])
-      }
-    </script>
+    <link href="css/index.css" rel="stylesheet" type="text/css">
+    <script src="js/randomPhoto.js"></script>
   </head>
 
   <body onload="getRandomImage()">
@@ -31,23 +19,23 @@
     <header>
       <!-- navbar -->
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="index.html">n0ahcode.net</a>
+        <a class="navbar-brand" href="/home">Noah's Stuff</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="about.html">About</a>
+              <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="cool.html">Something Cool</a>
+              <a class="nav-link" href="/cool">Something Cool</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="muted" href="game.html">secret</a>
+              <a class="nav-link" id="muted" href="/game">secret</a>
             </li>
           </ul>
           <form class="form-inline mt-2 mt-md-0">

@@ -1,30 +1,30 @@
-const express = require('express')
-const path = require('path')
+const express = require('express') 
+const path = require('path') 
 
-// Set up express
-app = express()
+const mainRouter = require('../routers/main')
+const indexRouter = require('../routers/index') 
+const loginRouter = require('../routers/login')
+const createAccRouter = require('../routers/create-account')
+const coolRouter = require('../routers/cool')
+const aboutRouter = require('../routers/about')
+const gameRouter = require('../routers/game')
+const _404Router = require('../routers/404')
 
-// Define paths for Express config
-const dir = path.join(__dirname, '../public')
+const app = express() 
 
-// Set up static directory to serve
-app.use(express.static(dir))
+const dir = path.join(__dirname, "../public/") 
+app.use(express.static(dir)) 
 
-// App pages
-app.get('', (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/index.html"))
-})
+app.use(mainRouter)
+app.use(indexRouter) 
+app.use(loginRouter)
+app.use(createAccRouter)
+app.use(coolRouter)
+app.use(aboutRouter)
+app.use(gameRouter)
+app.use(_404Router)
 
-app.get('/about', (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/about.html"))
-})
-
-app.get('/cool', (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/secret.html"))
-})
-
-const port = process.env.PORT || 3000
-
-app.listen(port, () => {
-  console.log('Server is up on port ' + port + '.')
+const port = process.env.PORT || 3000 
+app.listen(port, () => { 
+    console.log('Server is up on port ' + port) 
 })

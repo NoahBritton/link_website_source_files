@@ -1,0 +1,26 @@
+.gradient-custom-3 {
+  /* fallback for old browsers */
+  background: #363636;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, rgba(63, 63, 63, 0.5), rgba(23, 35, 102, 0.5));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgba(46, 46, 46, 0.5), rgba(52, 50, 150, 0.5))
+}
+.gradient-custom-4 {
+  /* fallback for old browsers */
+  background: #4d4d4d;
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, rgba(63, 63, 63, 0.5), rgba(23, 35, 102));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgba(46, 46, 46, 0.5), rgba(52, 50, 150))
+}
+
+.card-body {
+  background-color: rgba(175, 175, 175, 0);
+}
+.card {
+  background-color: rgb(175, 175, 175);
+}

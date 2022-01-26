@@ -26,3 +26,57 @@ function changeFaceColor() {
   document.getElementById("eleven").style.backgroundColor = document.getElementById("faceColor").value;
   document.getElementById("twelve").style.backgroundColor = document.getElementById("faceColor").value;
 }
+
+function toggleHuh() {
+  if (document.getElementById("one").style.backgroundImage == "url(\"img/stupdid.jpg\")") {
+    document.getElementById("one").style.backgroundImage = "url('img/empty.jpg')";
+    document.getElementById("one").style.backgroundSize = "200px";
+    document.getElementById("two").style.backgroundImage = "url('img/empty.jpg')";
+    document.getElementById("two").style.backgroundSize = "200px";
+    document.getElementById("three").style.backgroundImage = "url('img/empty.jpg')";
+    document.getElementById("three").style.backgroundSize = "200px";
+    document.getElementById("four").style.backgroundImage = "url('img/empty.jpg')";
+    document.getElementById("four").style.backgroundSize = "200px";
+    document.getElementById("five").style.backgroundImage = "url('img/empty.jpg')";
+    document.getElementById("five").style.backgroundSize = "200px";
+    document.getElementById("six").style.backgroundImage = "url('img/empty.jpg')";
+    document.getElementById("six").style.backgroundSize = "200px";
+    document.getElementById("seven").style.backgroundImage = "url('img/empty.jpg')";
+    document.getElementById("seven").style.backgroundSize = "200px";
+    document.getElementById("eight").style.backgroundImage = "url('img/empty.jpg')";
+    document.getElementById("eight").style.backgroundSize = "200px";
+    document.getElementById("nine").style.backgroundImage = "url('img/empty.jpg')";
+    document.getElementById("nine").style.backgroundSize = "200px";
+    document.getElementById("ten").style.backgroundImage = "url('img/empty.jpg')";
+    document.getElementById("ten").style.backgroundSize = "200px";
+    document.getElementById("eleven").style.backgroundImage = "url('img/empty.jpg')";
+    document.getElementById("eleven").style.backgroundSize = "200px";
+    document.getElementById("twelve").style.backgroundImage = "url('img/empty.jpg')";
+    document.getElementById("twelve").style.backgroundSize = "200px";
+  } else {
+    document.getElementById("one").style.backgroundImage = "url('img/stupdid.jpg')";
+    document.getElementById("one").style.backgroundSize = "200px";
+    document.getElementById("two").style.backgroundImage = "url('img/stupdid.jpg')";
+    document.getElementById("two").style.backgroundSize = "200px";
+    document.getElementById("three").style.backgroundImage = "url('img/stupdid.jpg')";
+    document.getElementById("three").style.backgroundSize = "200px";
+    document.getElementById("four").style.backgroundImage = "url('img/stupdid.jpg')";
+    document.getElementById("four").style.backgroundSize = "200px";
+    document.getElementById("five").style.backgroundImage = "url('img/stupdid.jpg')";
+    document.getElementById("five").style.backgroundSize = "200px";
+    document.getElementById("six").style.backgroundImage = "url('img/stupdid.jpg')";
+    document.getElementById("six").style.backgroundSize = "200px";
+    document.getElementById("seven").style.backgroundImage = "url('img/stupdid.jpg')";
+    document.getElementById("seven").style.backgroundSize = "200px";
+    document.getElementById("eight").style.backgroundImage = "url('img/stupdid.jpg')";
+    document.getElementById("eight").style.backgroundSize = "200px";
+    document.getElementById("nine").style.backgroundImage = "url('img/stupdid.jpg')";
+    document.getElementById("nine").style.backgroundSize = "200px";
+    document.getElementById("ten").style.backgroundImage = "url('img/stupdid.jpg')";
+    document.getElementById("ten").style.backgroundSize = "200px";
+    document.getElementById("eleven").style.backgroundImage = "url('img/stupdid.jpg')";
+    document.getElementById("eleven").style.backgroundSize = "200px";
+    document.getElementById("twelve").style.backgroundImage = "url('img/stupdid.jpg')";
+    document.getElementById("twelve").style.backgroundSize = "200px";
+  }
+}
