@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/app.js",
   "nodemonConfig": {
-    "ext": "js,html,css"
+    "ext": "js,html,css,hbs"
   },
   "scripts": {
     "dev": "nodemon src/app.js",
@@ -14,7 +14,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "hbs": "^4.2.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

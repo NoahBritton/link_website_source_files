@@ -33,7 +33,7 @@ h1{
   background-color: #00669900;
   margin: 0 auto;
   width: 1540px;
-  height: 682.5px;
+  height: 632.5px;
   position: relative;
   box-shadow: inset 0 0 20px #155;
   border-radius: 0px;
@@ -47,13 +47,12 @@ h1{
   height: 50px;
   border-radius: 50%;
   background-color: #999999;
-  background-image : url('img/stupdid.jpg');
   box-shadow: inset -5px -5px 5px rgba(0,0,0,.6), 15px 15px 2px rgba(0,0,0,.04);
   position: absolute;
-  -webkit-animation: moveX 2s linear 0s infinite alternate, moveY 3.4s linear 0s infinite alternate;
-  -moz-animation: moveX 2s linear 0s infinite alternate, moveY 3.4s linear 0s infinite alternate;
-  -o-animation: moveX 2s linear 0s infinite alternate, moveY 3.4s linear 0s infinite alternate;
-  animation: moveX 2s linear 0s infinite alternate, moveY 3.4s linear 0s infinite alternate;
+  -webkit-animation: moveX 5s linear 0s infinite alternate, moveY 3.4s linear 0s infinite alternate;
+  -moz-animation: moveX 5s linear 0s infinite alternate, moveY 3.4s linear 0s infinite alternate;
+  -o-animation: moveX 5s linear 0s infinite alternate, moveY 3.4s linear 0s infinite alternate;
+  animation: moveX 5s linear 0s infinite alternate, moveY 3.4s linear 0s infinite alternate;
 }
 
 @-webkit-keyframes moveX {
@@ -70,27 +69,27 @@ h1{
 }
 
 @-webkit-keyframes moveY {
-  from { top: 0; } to { top: 622.5px; }
+  from { top: 0; } to { top: 582.5px; }
 }
 @-moz-keyframes moveY {
-  from { top: 0; } to { top: 662.5px; }
+  from { top: 0; } to { top: 582.5px; }
 }
 @-o-keyframes moveY {
-  from { top: 0; } to { top: 652.5px; }
+  from { top: 0; } to { top: 582.5px; }
 }
 @keyframes moveY {
-  from { top: 0; } to { top: 632.5px; }
+  from { top: 0; } to { top: 582.5px; }
 }
 
 @keyframes starTwinkle{
   0%{
-     background:rgba(255,255,255,0.4);
+    background:rgba(255,255,255,0.4);
   }
   25%{
     background:rgba(255,255,255,0.8);
   }
   50%{
-   background:rgba(255,255,255,1);
+    background:rgba(255,255,255,1);
   }
   75%{
     background:rgba(255,255,255,0.8);

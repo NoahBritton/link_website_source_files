@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded",function(){
    setInterval(createStar,100);
    function createStar(){
      var right=Math.random()*500;
-     var top=Math.random()*screen.height - 150;
+     var top=Math.random()*screen.height - 180;
      var star=document.createElement("div");
   star.classList.add("star")
    body.appendChild(star);
