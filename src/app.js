@@ -4,11 +4,11 @@ const hbs = require('hbs')
 
 const mainRouter = require('routers/main')
 const indexRouter = require('routers/index') 
-const createAccRouter = require('../routers/create-account')
-const coolRouter = require('../routers/cool')
-const aboutRouter = require('../routers/about')
-const gameRouter = require('../routers/game')
-const _404Router = require('../routers/404')
+const createAccRouter = require('routers/create-account')
+const coolRouter = require('routers/cool')
+const aboutRouter = require('routers/about')
+const gameRouter = require('routers/game')
+const _404Router = require('routers/404')
 
 const app = express() 
 
