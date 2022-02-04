@@ -7,35 +7,24 @@
     <meta name="author" content="Noah Britton">
 
     <title>Noah's Homepage</title>
-    
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
-    <link href="css/index.css" rel="stylesheet" type="text/css">
-    <script src="js/randomPhoto.js"></script>
+    {{> head}}
+    <script defer src="js/login.js"></script>
   </head>
 
-  <body onload="getRandomImage()">
-
+  <body>
     <header>
-      <!-- navbar -->
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="/home">Noah's Stuff</a>
+        <a class="navbar-brand" href="/">Noah's Stuff</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/home">Home</a>
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/about">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/cool">Something Cool</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="muted" href="/thesecretpage">secret</a>
+              <a class="nav-link" href="/"></a>
             </li>
           </ul>
           <form class="form-inline mt-2 mt-md-0">
@@ -45,8 +34,15 @@
         </div>
       </nav>
     </header>
+    <main role="main" class="container">
+    <p id="message"></p>
+    <form id="loginForm">
+      <input id="email" placeholder="email@example.com" aria-label="Email">
+      <input id="password" placeholder="password" aria-label="password">
+      <button>Log in</button>
+    </form>
+    </main>
 
-    {{>main}}
-  {{>footer}}
+  {{> footer}}
   </body>
 </html>

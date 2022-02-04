@@ -20,6 +20,10 @@ body {
   background-color: rgb(28, 28, 33);
   margin: 0px;
   padding-bottom: 10px;
+
+}
+#loginForm {
+  margin-top: 3rem;
 }
 
 #muted {
