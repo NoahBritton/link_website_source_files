@@ -8,6 +8,8 @@ const createAccRouter = require('./routers/create-account')
 const coolRouter = require('./routers/cool')
 const aboutRouter = require('./routers/about')
 const gameRouter = require('./routers/game')
+const emulatorRouter = require('./routers/emulator')
+const dragDropRouter = require('./routers/dragDrop')
 const _404Router = require('./routers/404')
 
 const app = express() 
@@ -29,6 +31,8 @@ app.use(createAccRouter)
 app.use(coolRouter)
 app.use(aboutRouter)
 app.use(gameRouter)
+app.use(emulatorRouter)
+app.use(dragDropRouter)
 app.use(_404Router)
 
 const port = process.env.PORT || 3000 

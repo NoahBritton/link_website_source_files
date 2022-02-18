@@ -8,7 +8,7 @@ html {
   -ms-overflow-style: scrollbar;
   -webkit-tap-highlight-color: transparent;
   color: #bfbfbf;
-  background: #1f1f1f !important;
+  background: rgb(28, 28, 33);
 }
 
 body {
@@ -22,6 +22,7 @@ body {
   padding-bottom: 10px;
 
 }
+
 #loginForm {
   margin-top: 3rem;
 }
@@ -34,6 +35,29 @@ body {
 #muted:hover {
   color: red;
 }
+
+#div1 {
+  margin-top: 10rem;
+  width: 505px;
+  height: 375px;
+  border: 1px solid #ff0000;
+}
+#div2 {
+  margin-top: 10rem;
+  width: 505px;
+  height: 375px;
+  border: 1px solid #ff0000;
+}
+.container {
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  grid-template-rows: 1fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "div1 div2"; 
+}
+.div1 { grid-area: div1; }
+.div2 { grid-area: div2; }
 
 .footer {
   position: absolute;

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>GBA Emulator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{>head}}
+  <link href="css/secret" rel="stylesheet">
+  <link href="css/index.css" rel="stylesheet">
+  <link href="css/emulator.css" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="/home?token=abc123">Noah's Stuff</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/home?token=abc123">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/cool">Something Cool</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/game">secret <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+        <form class="form-inline mt-2 mt-md-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="container">
+        <canvas id="screen" width="480" height="320"></canvas>
+        <section id="gameinfo">
+          <table class="table table-striped table-dark table-bordered table-sm">
+            <thead>
+              <td colspan="7">Emulator button mapping</td>
+            </thead>
+            <tbody>
+              <tr>
+                <th>gba</th>
+                <th>A</th>
+                <th>B</th>
+                <th>L</th>
+                <th>R</th>
+                <th>Start</th>
+                <th>Select</th>
+              </tr>
+              <tr>
+                <th>Keyboard</th>
+                <td>Z</td>
+                <td>X</td>
+                <td>A</td>
+                <td>S</td>
+                <td>Enter</td>
+                <td>/</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section id="controls">
+          <div id="preload">
+            <button class="bigbutton" id="select" onclick="document.getElementById('loader').click()">UPLOAD</button>
+            <button onclick="document.getElementById('saveloader').click()">Upload Savegame</button>
+            <input id="saveloader" type="file" onchange="uploadSavedataPending(this.files[0]);">
+            <input id="loader" type="file" accept=".gba" onchange="run(this.files[0]);">
+          </div>
+          <div id="ingame" class="hidden">
+            <button id="pause" class="bigbutton" onclick="togglePause()">PAUSE</button>
+            <button class="bigbutton" onclick="reset()">RESET</button>
+            <button onclick="gba.downloadSavedata()">Download Savegame</button>
+            <button onclick="screenshot()">Screenshot</button>
+            <label id="pixelated"><input type="checkbox" onchange="setPixelated(this.checked)"> Pixelated</label>
+          </div>
+        </section>
+        <section id="instructions">
+          <p>
+            This page alone makes my whole website illegal for various reasons, copyright being paramount.</br>
+            However, legality aside, you can click on one of the buttons to load the games I had at the time of making this.</br> If you have any <code>.gba</code> files you can upload and play them using the very obviously labled "upload" button.
+          </p>
+        </section>
+        <!-- End ingame controls -->
+    </div>
+  </main>
+  <!-- End Controls -->
+  {{>footer}}
+
+  <script src="js/util.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/arm.js"></script>
+  <script src="js/thumb.js"></script>
+  <script src="js/mmu.js"></script>
+  <script src="js/io.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/video.js"></script>
+  <script src="js/video/proxy.js"></script>
+  <script src="js/video/software.js"></script>
+  <script src="js/irq.js"></script>
+  <script src="js/keypad.js"></script>
+  <script src="js/sio.js"></script>
+  <script src="js/savedata.js"></script>
+  <script src="js/gpio.js"></script>
+  <script src="js/gba.js"></script>
+  <script src="resources/xhr.js"></script>
+
+
+  <!-- Start APP Scripts -->
+  <script>
+    var gba;
+    var runCommands = [];
+
+    // Setup the emulator
+    try {
+      gba = new GameBoyAdvance();
+      gba.keypad.eatInput = true;
+
+      gba.setLogger(function (level, error) {
+        console.error(error);
+
+        gba.pause();
+
+        var screen = document.getElementById('screen');
+
+        if (screen.getAttribute('class') == 'dead') {
+          console.log('We appear to have crashed multiple times without reseting.');
+          return;
+        }
+
+
+        // Show error image in the emulator screen
+        // The image can be retrieven from the repository
+        var crash = document.createElement('img');
+        crash.setAttribute('id', 'crash');
+        crash.setAttribute('src', 'resources/crash.png');
+        screen.parentElement.insertBefore(crash, screen);
+        screen.setAttribute('class', 'dead');
+      });
+    } catch (exception) {
+      gba = null;
+    }
+
+    // Initialize emulator once the browser loads
+    window.onload = function () {
+      if (gba && FileReader) {
+        var canvas = document.getElementById('screen');
+        gba.setCanvas(canvas);
+
+        gba.logLevel = gba.LOG_ERROR;
+
+        // Load the BIOS file of GBA (change the path according to yours)
+        loadRom('resources/bios.bin', function (bios) {
+          gba.setBios(bios);
+        });
+
+        if (!gba.audio.context) {
+          // Remove the sound box if sound isn't available
+          var soundbox = document.getElementById('sound');
+          soundbox.parentElement.removeChild(soundbox);
+        }
+
+      } else {
+        var dead = document.getElementById('controls');
+        dead.parentElement.removeChild(dead);
+      }
+    }
+
+    function fadeOut(id, nextId, kill) {
+      var e = document.getElementById(id);
+      var e2 = document.getElementById(nextId);
+      if (!e) {
+        return;
+      }
+
+      var removeSelf = function () {
+        if (kill) {
+          e.parentElement.removeChild(e);
+        } else {
+          e.setAttribute('class', 'dead');
+          e.removeEventListener('webkitTransitionEnd', removeSelf);
+          e.removeEventListener('oTransitionEnd', removeSelf);
+          e.removeEventListener('transitionend', removeSelf);
+        }
+        if (e2) {
+          e2.setAttribute('class', 'hidden');
+          setTimeout(function () {
+            e2.removeAttribute('class');
+          }, 0);
+        }
+      }
+
+      e.addEventListener('webkitTransitionEnd', removeSelf, false);
+      e.addEventListener('oTransitionEnd', removeSelf, false);
+      e.addEventListener('transitionend', removeSelf, false);
+      e.setAttribute('class', 'hidden');
+    }
+
+    /**
+     * Starts the emulator with the given ROM file
+     * 
+     * @param file 
+     */
+    function run(file) {
+      var dead = document.getElementById('loader');
+
+      dead.value = '';
+
+      var load = document.getElementById('select');
+      load.removeAttribute('onclick');
+
+      var pause = document.getElementById('pause');
+      pause.textContent = "PAUSE";
+
+      gba.loadRomFromFile(file, function (result) {
+        if (result) {
+          for (var i = 0; i < runCommands.length; ++i) {
+            runCommands[i]();
+          }
+
+          runCommands = [];
+          fadeOut('preload', 'ingame');
+          fadeOut('instructions', null, true);
+          gba.runStable();
+        } else {
+          load.textContent = 'FAILED';
+
+          setTimeout(function () {
+            load.textContent = 'SELECT';
+
+            load.onclick = function () {
+              document.getElementById('loader').click();
+            };
+
+          }, 3000);
+        }
+      });
+    }
+
+    /**
+     * Resets the emulator
+     * 
+     */
+    function reset() {
+      gba.pause();
+      gba.reset();
+
+      var load = document.getElementById('select');
+
+      load.textContent = 'SELECT';
+
+      var crash = document.getElementById('crash');
+
+      if (crash) {
+        var context = gba.targetCanvas.getContext('2d');
+        context.clearRect(0, 0, 480, 320);
+        gba.video.drawCallback();
+        crash.parentElement.removeChild(crash);
+        var canvas = document.getElementById('screen');
+        canvas.removeAttribute('class');
+      } else {
+        lcdFade(gba.context, gba.targetCanvas.getContext('2d'), gba.video.drawCallback);
+      }
+
+      load.onclick = function () {
+        document.getElementById('loader').click();
+      };
+
+      fadeOut('ingame', 'preload');
+
+      // Clear the ROM
+      gba.rom = null;
+    }
+
+    /**
+     * Stores the savefile data in the emulator.
+     * 
+     * @param file 
+     */
+    function uploadSavedataPending(file) {
+      runCommands.push(function () {
+        gba.loadSavedataFromFile(file)
+      });
+    }
+
+    /**
+     * Toggles the state of the game
+     */
+    function togglePause() {
+      var e = document.getElementById('pause');
+
+      if (gba.paused) {
+        gba.runStable();
+        e.textContent = "PAUSE";
+      } else {
+        gba.pause();
+        e.textContent = "UNPAUSE";
+      }
+    }
+
+    /**
+     * From a canvas context, creates an LCD animation that fades the content away.
+     * 
+     * @param context 
+     * @param target 
+     * @param callback 
+     */
+    function lcdFade(context, target, callback) {
+      var i = 0;
+
+      var drawInterval = setInterval(function () {
+        i++;
+
+        var pixelData = context.getImageData(0, 0, 240, 160);
+
+        for (var y = 0; y < 160; ++y) {
+          for (var x = 0; x < 240; ++x) {
+            var xDiff = Math.abs(x - 120);
+            var yDiff = Math.abs(y - 80) * 0.8;
+            var xFactor = (120 - i - xDiff) / 120;
+            var yFactor = (80 - i - ((y & 1) * 10) - yDiff + Math.pow(xDiff, 1 / 2)) / 80;
+            pixelData.data[(x + y * 240) * 4 + 3] *= Math.pow(xFactor, 1 / 3) * Math.pow(yFactor, 1 / 2);
+          }
+        }
+
+        context.putImageData(pixelData, 0, 0);
+
+        target.clearRect(0, 0, 480, 320);
+
+        if (i > 40) {
+          clearInterval(drawInterval);
+        } else {
+          callback();
+        }
+      }, 50);
+    }
+
+    /**
+     * Set the volume of the emulator.
+     * 
+     * @param value 
+     */
+    function setVolume(value) {
+      gba.audio.masterVolume = Math.pow(2, value) - 1;
+    }
+  </script>
+  <!-- End APP Scripts -->
+
+  <!-- Start Events Scripts -->
+  <script>
+    // If clicked, simulate click on the File Select input to load a ROM
+    document.getElementById("select").addEventListener("click", function () {
+      document.getElementById("loader").click();
+    }, false);
+
+    // Run the emulator with the loaded ROM
+    document.getElementById("loader").addEventListener("change", function () {
+      var ROM = this.files[0];
+      run(ROM);
+    }, false);
+
+    // If clicked, simulate click on the File Select Input to load the savegame file
+    document.getElementById("select-savegame-btn").addEventListener("click", function () {
+      document.getElementById('saveloader').click();
+    }, false);
+
+    // Load the savegame to the emulator
+    document.getElementById("saveloader").addEventListener("change", function () {
+      var SAVEGAME = this.files[0];
+      uploadSavedataPending(SAVEGAME);
+    }, false);
+
+    // Pause/Resume game
+    document.getElementById("pause").addEventListener("click", function () {
+      togglePause();
+    }, false);
+
+    // Reset game
+    document.getElementById("reset-btn").addEventListener("click", function () {
+      reset();
+    }, false);
+
+    // Download the savegamefile
+    document.getElementById("download-savegame").addEventListener("click", function () {
+      gba.downloadSavedata();
+    }, false);
+
+    // Mute/Unmute emulator
+    document.getElementById("audio-enabled-checkbox").addEventListener("change", function () {
+      gba.audio.masterEnable = this.checked;
+    }, false);
+
+    // Handle volume level slider
+    document.getElementById("volume-level-slider").addEventListener("change", function () {
+      var volumeLevel = this.value;
+      setVolume(volumeLevel);
+    }, false);
+    document.getElementById("volume-level-slider").addEventListener("input", function () {
+      var volumeLevel = this.value;
+      setVolume(volumeLevel);
+    }, false);
+
+    // In order to pause/resume the game when the user changes the website tab in the browser
+    // add the 2 following listeners to the window !
+    // 
+    // This feature is problematic/tricky to handle, so you can make it better if you need to
+    window.onblur = function () {
+      if (gba.hasRom()) {
+        var e = document.getElementById('pause');
+
+        if (!gba.paused) {
+          gba.pause();
+          e.textContent = "UNPAUSE";
+
+          console.log("Window Focused: the game has been paused");
+        }
+      }
+    };
+
+    window.onfocus = function () {
+      if (gba.hasRom()) {
+        var e = document.getElementById('pause');
+
+        if (gba.paused) {
+          gba.runStable();
+          e.textContent = "PAUSE";
+
+          console.log("Window Focused: the game has been resumed");
+        }
+      }
+    };
+  </script>
+  <!-- End Events Scripts -->
+</body>
+
+</html>

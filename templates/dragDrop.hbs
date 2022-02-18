@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+  <meta name="description" content="Home page">
+  <meta name="author" content="Noah Britton">
+
+  <title>Noah's Homepage</title>
+
+  {{> head}}
+  <link href="css/index.css" rel="stylesheet" type="text/css">
+  <script src="js/randomPhoto.js"></script>
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="/home">Noah's Stuff</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/cool">Something Cool</a>
+          </li>
+          <li class="nav-item">
+            <p> Access token: {{token}} </p>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="muted" href="/thesecretpage">secret</a>
+          </li>
+        </ul>
+        <form class="form-inline mt-2 mt-md-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container">
+      <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+      <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"><img id="drag1" src="img/stupdid.jpg" draggable="true" ondragstart="drag(event)"></div>
+    </div>
+  </main>
+
+  {{> footer}}
+  <script>
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+    function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+    }
+    function drop(ev) {
+      ev.preventDefault();
+      var data = ev.dataTransfer.getData("text");
+      ev.target.appendChild(document.getElementById(data));
+    }
+  </script>
+
+</body>
+
+</html>
