@@ -1,13 +1,19 @@
 const protocol = window.location.protocol
 const host = window.location.host
 
+console.log('there')
+
 const createAccountForm = document.querySelector('#createAccountForm')
+
+
+
 const emailInput = document.querySelector('#email')
 const usernameInput = document.querySelector('#username')
 const passwordInput = document.querySelector('#password')
 const message = document.querySelector("#message")
 
-createAccountForm.addEventListener('submit', async(e) => {
+createAccountForm.addEventListener('submit', async (e) => {
+    console.log('test')
     e.preventDefault()
 
     const email = emailInput.value;
@@ -15,6 +21,7 @@ createAccountForm.addEventListener('submit', async(e) => {
     const password = passwordInput.value;
     let data = { email, password, name }
 
+    //const url = 'http://localhost:3002/users'
     const url = 'https://nbritton-api-app.herokuapp.com/users'
 
     const options = {
@@ -40,3 +47,5 @@ createAccountForm.addEventListener('submit', async(e) => {
         window.location.replace(newUrl)
     }
 })
+
+console.log(createAccountForm)

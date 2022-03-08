@@ -12,7 +12,7 @@ loginForm.addEventListener("submit", async(e) => {
     const password = passwordInput.value
     const data = { email, password }
 
-    //const url = "http://localhost:3001/users/login"
+    //const url = "http://localhost:3002/users/login"
     const url = 'https://nbritton-api-app.herokuapp.com/users/login'
 
     const options = {
@@ -33,7 +33,7 @@ loginForm.addEventListener("submit", async(e) => {
         localStorage.setItem("token", data.token)
             alert(data.token)
 
-        const newUrl = `${protocol}//${host}/home`
+        const newUrl = `${protocol}//${host}/main`
         window.location.replace(newUrl)
     }
 
