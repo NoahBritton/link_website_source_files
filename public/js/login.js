@@ -12,7 +12,8 @@ loginForm.addEventListener("submit", async(e) => {
     const password = passwordInput.value
     const data = { email, password }
 
-    const url = "https://nbritton-api-app.herokuapp.com/users/login"
+    //const url = "http://localhost:3001/users/login"
+    const url = 'https://nbritton-api-app.herokuapp.com/users/login'
 
     const options = {
         method: "POST",
@@ -27,14 +28,13 @@ loginForm.addEventListener("submit", async(e) => {
     if (response.status === 400) {
         const message = document.querySelector("#message")
         message.textContent = "Invalid email or password."
-    } 
-    else if (response.status === 200) {
+    } else if (response.status === 200) {
         const data = await response.json()
-        
         localStorage.setItem("token", data.token)
-        alert(data.token)
+            alert(data.token)
 
-        const newUrl = `${protocol}//${host}/main`
+        const newUrl = `${protocol}//${host}/home`
         window.location.replace(newUrl)
     }
+
 })
