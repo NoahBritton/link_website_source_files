@@ -15,8 +15,7 @@ createAccountForm.addEventListener('submit', async(e) => {
     const password = passwordInput.value;
     let data = { email, password, name }
 
-    //const url = 'http://localhost:3001/users'
-    const url = 'https://<<your-api-server-domain>>/users'
+    const url = 'https://nbritton-api-app.herokuapp.com/users'
 
     const options = {
         method: 'POST',
