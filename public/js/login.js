@@ -12,8 +12,8 @@ loginForm.addEventListener("submit", async(e) => {
     const password = passwordInput.value
     const data = { email, password }
 
-    const url = "http://localhost:3002/users/login"
-    //const url = 'https://nbritton-api-app.herokuapp.com/users/login'
+    //const url = "http://localhost:3002/users/login"
+    const url = 'https://nbritton-api-app.herokuapp.com/users/login'
 
     const options = {
         method: "POST",
