@@ -12,8 +12,8 @@ loginForm.addEventListener("submit", async(e) => {
     const password = passwordInput.value
     const data = { email, password }
 
-    //const url = "http://localhost:3002/users/login"
-    const url = 'https://nbritton-api-app.herokuapp.com/users/login'
+    const url = "http://localhost:3002/users/login"
+    //const url = 'https://nbritton-api-app.herokuapp.com/users/login'
 
     const options = {
         method: "POST",
@@ -31,7 +31,7 @@ loginForm.addEventListener("submit", async(e) => {
     } else if (response.status === 200) {
         const data = await response.json()
         localStorage.setItem("token", data.token)
-            alert(data.token)
+            //alert(data.token)
 
         const newUrl = `${protocol}//${host}/main`
         window.location.replace(newUrl)
