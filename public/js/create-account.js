@@ -1,7 +1,6 @@
 const protocol = window.location.protocol
 const host = window.location.host
 
-console.log('there')
 
 const createAccountForm = document.querySelector('#createAccountForm')
 
@@ -13,7 +12,6 @@ const passwordInput = document.querySelector('#password')
 const message = document.querySelector("#message")
 
 createAccountForm.addEventListener('submit', async (e) => {
-    console.log('test')
     e.preventDefault()
 
     const email = emailInput.value;
@@ -47,5 +45,3 @@ createAccountForm.addEventListener('submit', async (e) => {
         window.location.replace(newUrl)
     }
 })
-
-console.log(createAccountForm)
