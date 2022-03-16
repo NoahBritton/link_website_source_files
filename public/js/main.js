@@ -104,7 +104,7 @@ modifyAccountModalSaveButton.addEventListener("click", async(e) => {
     const name = nameInput.value
     const password = passwordInput.value
     const requestData = {...name && { name }, ...password && { password } }
-    //console.log(requestData)
+    console.log(requestData)
 
     const options = {
         method: "PATCH",
@@ -114,6 +114,7 @@ modifyAccountModalSaveButton.addEventListener("click", async(e) => {
         },
         body: JSON.stringify(requestData),
     }
+    console.log(options)
 
     let response = await fetch(url, options)
 
