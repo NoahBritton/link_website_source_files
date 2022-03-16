@@ -97,7 +97,7 @@ modifyAccountModalSaveButton.addEventListener("click", async(e) => {
     const token = localStorage.getItem("token")
 
     const url = "http://localhost:3001/users/me"
-        //const url = 'https://n0code-web-api-4.herokuapp.com/users/me'
+    //const url = 'https://n0code-web-api-4.herokuapp.com/users/me'
 
     const nameInput = document.querySelector("#nameInput")
     const passwordInput = document.querySelector("#passwordInput")
