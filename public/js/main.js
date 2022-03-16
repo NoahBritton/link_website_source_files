@@ -120,7 +120,7 @@ modifyAccountModalSaveButton.addEventListener("click", async(e) => {
 
     if (response.status === 200) {
         const contentArea = document.querySelector("#contentArea")
-        contentArea.innerHTML = `Saved successful.`
+        contentArea.innerHTML = `Saved successfully, you may now exit the modal.`
     } else {
         console.log("HTTP-Error: " + response.status)
     }
