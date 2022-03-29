@@ -37,6 +37,7 @@ async function initialLoad() {
         taskTitle.innerHTML = `${data.title}`
         taskDesc.innerHTML = `${data.description}`
         taskID.innerHTML = `${data._id}`
+        console.log(response)
         if (data.completed === false) {
           checkBoxHolder.appendChild(uncheckedBox)
         } else {
@@ -56,8 +57,6 @@ async function initialLoad() {
 nextTask.addEventListener("click", async(e) => {
   e.preventDefault()
 
-  console.log("button clicked")
-
   const token = localStorage.getItem("token")
 
   const url = `https://nbritton-api-app.herokuapp.com/tasks?skip=${skip}&limit=${limit}`
@@ -73,8 +72,9 @@ nextTask.addEventListener("click", async(e) => {
 
   if (response.ok) {
       if (response.status === 200) {
+        console.log("button pressed")
         const data = await response.json()
-
+        console.log(data)
         taskTitle.innerHTML = `${data.title}`
         taskDesc.innerHTML = `${data.description}`
         if (data.completed == 'false') {
