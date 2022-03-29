@@ -27,7 +27,7 @@ async function initialLoad() {
           Authorization: `Bearer ${token}`,
       },
   }
-  
+  console.log("initial load")
   let response = await fetch(url, options)
 
   if (response.ok) {
@@ -37,7 +37,6 @@ async function initialLoad() {
         taskTitle.innerHTML = `${data.title}`
         taskDesc.innerHTML = `${data.description}`
         taskID.innerHTML = `${data._id}`
-        console.log(taskID.innerHTML)
         if (data.completed === false) {
           checkBoxHolder.appendChild(uncheckedBox)
         } else {
@@ -56,6 +55,8 @@ async function initialLoad() {
 // display a task on load
 nextTask.addEventListener("click", async(e) => {
   e.preventDefault()
+
+  console.log("button clicked")
 
   const token = localStorage.getItem("token")
 
