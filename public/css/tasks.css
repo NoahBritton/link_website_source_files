@@ -9,13 +9,13 @@
   grid-auto-flow: row;
   grid-template-areas:
     "card-title deleteTask"
-    "card-text modfyTask";
+    "card-text modifyTask";
 }
 
 .card-title { grid-area: card-title; }
 
 .card-text { grid-area: card-text; }
 
-#modfyTask { grid-area: modfyTask; }
+#modifyTask { grid-area: modfyTask; }
 
 #deleteTask { grid-area: deleteTask; }
