@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+  <meta name="description" content="task page">
+  <meta name="author" content="Noah Britton">
+  {{> head}}
+  <script defer src="js/tasks"></script>
+  <title>Tasks</title>
+</head>
+
+<body>
+  {{> header}}
+  <button style="background-color:rgb(47, 223, 71)" type="button" id="newTask">Create New Task</button>
+  <div id="taskArea"></div>
+  <button style="background-color:rgb(47, 188, 223)" type="button" id="nextTask">Load Next</button>
+  {{> footer}}
+  {{> cardTemplate}}
+</body>
+
+</html>

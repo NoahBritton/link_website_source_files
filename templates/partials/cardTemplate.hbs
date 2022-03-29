@@ -1,0 +1,26 @@
+<template id="taskCard">
+  <div class="card" style="width: 18rem;" id="taskArea">
+    <div class="card-body">
+      <h5 class="card-title" id="taskTitle"></h5>
+      <div id="checkBoxHolder"></div>
+      <p class="card-text" id="taskDesc"></p>
+      <button style="background-color:rgb(223, 47, 47)" type="button" id="deleteTask">delete</button>
+      <button style="background-color:rgb(33, 33, 151)" type="button" id="modifyTask">modify</button>
+      <p id="taskID" style="display: none;"></p>
+    </div>
+  </div>
+</template>
+
+<template id="checkedBox">
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" checked disabled>
+    <label class="form-check-label" for="flexCheckCheckedDisabled"></label>
+  </div>
+</template>
+
+<template id="uncheckedBox">
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled>
+    <label class="form-check-label" for="flexCheckDisabled"></label>
+  </div>
+</template>
