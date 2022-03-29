@@ -19,7 +19,7 @@ const limit = 1
 async function initialLoad() {
   const token = localStorage.getItem("token")
 
-  const url = `https://nbritton-api-app.herokuapp.com/tasks?skip=${skip}&limit=${limit}`
+  const url = 'https://nbritton-api-app.herokuapp.com/tasks?skip=0&limit=1'
   console.log(url)
   const options = {
       method: "GET",
