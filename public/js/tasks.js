@@ -89,9 +89,9 @@ nextTask.addEventListener("click", async(e) => {
           const checkedBox = document.importNode(checkedBoxTemp)
           checkBoxHolder.appendChild(checkedBox)
         }
-        
+
         const cardClone = document.importNode(taskCard, true)
-        container.appendChild(cardClone)
+        taskArea.appendChild(cardClone)
         skip++
       }
   } else {
