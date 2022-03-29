@@ -35,12 +35,10 @@ async function initialLoad() {
 
   if (response.ok) {
       if (response.status === 200) {
-        console.log(skip)
         const data = await response.json()
-        console.log(data[0]._id)
-        taskTitle.innerHTML = `${data.title}`
-        taskDesc.innerHTML = `${data.description}`
-        taskID.innerHTML = `${data._id}`
+        taskTitle.innerHTML = `${data[0].title}`
+        taskDesc.innerHTML = `${data[0].description}`
+        taskID.innerHTML = `${data[0]._id}`
 
         if (data[0].completed === false) {
           const uncheckedBox = document.importNode(uncheckedBoxTemp)
@@ -78,13 +76,13 @@ nextTask.addEventListener("click", async(e) => {
 
   if (response.ok) {
       if (response.status === 200) {
-        console.log("button pressed")
         const data = await response.json()
-        console.log(data)
-        taskTitle.innerHTML = `${data.title}`
-        taskDesc.innerHTML = `${data.description}`
 
-        if (data.completed === false) {
+        taskTitle.innerHTML = `${data[0].title}`
+        taskDesc.innerHTML = `${data[0].description}`
+        taskID.innerHTML = `${data[0]._id}`
+
+        if (data[0].completed === false) {
           const uncheckedBox = document.importNode(uncheckedBoxTemp)
           checkBoxHolder.appendChild(uncheckedBox)
         } else {
