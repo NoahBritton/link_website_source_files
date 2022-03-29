@@ -9,6 +9,7 @@ const coolRouter = require('./routers/cool')
 const aboutRouter = require('./routers/about')
 const gameRouter = require('./routers/game')
 const dragDropRouter = require('./routers/dragDrop')
+const taskRouter = require('./routers/tasks')
 const _404Router = require('./routers/404')
 
 const app = express() 
@@ -31,6 +32,7 @@ app.use(coolRouter)
 app.use(aboutRouter)
 app.use(gameRouter)
 app.use(dragDropRouter)
+app.use(taskRouter)
 app.use(_404Router)
 
 const port = process.env.PORT || 3000 
