@@ -2,7 +2,7 @@ const nextTask = document.querySelector("#nextTask")
 const cardTemp = document.querySelector("#taskCard")
 const taskArea = document.querySelector("#taskArea")
 const taskCard = cardTemp.content.querySelector(".card") ;
-
+console.log(taskCard)
 const taskID = taskCard.content.querySelector("#taskID")
 const taskDesc = taskCard.content.querySelector("#taskDesc")
 const taskTitle = taskCard.content.querySelector("#taskTitle")
