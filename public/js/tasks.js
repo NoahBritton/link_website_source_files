@@ -20,7 +20,7 @@ async function initialLoad() {
   const token = localStorage.getItem("token")
 
   const url = `https://nbritton-api-app.herokuapp.com/tasks?skip=${skip}&limit=${limit}`
-
+  console.log(url)
   const options = {
       method: "GET",
       headers: {
@@ -60,7 +60,7 @@ nextTask.addEventListener("click", async(e) => {
   const token = localStorage.getItem("token")
 
   const url = `https://nbritton-api-app.herokuapp.com/tasks?skip=${skip}&limit=${limit}`
-
+  console.log(url)
   const options = {
       method: "GET",
       headers: {
