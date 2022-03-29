@@ -8,6 +8,23 @@
   gap: 0px 0px;
   grid-auto-flow: row;
   grid-template-areas:
-    ".card-title #deleteTask"
+    ". ."
     ".card-text #modifyTask";
 }
+.container {  display: grid;
+  grid-template-columns: 1.6fr 0.4fr;
+  grid-template-rows: 0.5fr 0.5fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "card-title deleteTask"
+    "card-text modfyTask";
+}
+
+.card-title { grid-area: card-title; }
+
+.card-text { grid-area: card-text; }
+
+#modfyTask { grid-area: modfyTask; }
+
+#deleteTask { grid-area: deleteTask; }
