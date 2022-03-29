@@ -13,7 +13,7 @@ const uncheckedBoxTemp = document.querySelector("#uncheckedBox")
 const host = window.location.host
 const protocol = window.location.protocol
 
-const skip = 0
+var skip = 0
 const limit = 1
 
 async function initialLoad() {
