@@ -12,6 +12,9 @@ const checkBoxHolder = cardContent.querySelector("#checkBoxHolder")
 const checkedBoxTemp = document.querySelector("#checkedBox")
 const uncheckedBoxTemp = document.querySelector("#uncheckedBox")
 
+const checkedBox = checkedBoxTemp.content.querySelector(".form-check")
+const uncheckedBox = uncheckedBoxTemp.content.querySelector(".form-check")
+
 const host = window.location.host
 const protocol = window.location.protocol
 
@@ -41,11 +44,11 @@ async function initialLoad() {
         taskID.innerHTML = `${data[0]._id}`
 
         if (data[0].completed === false) {
-          const uncheckedBox = document.importNode(uncheckedBoxTemp)
-          checkBoxHolder.appendChild(uncheckedBox)
+          const incomplete = document.importNode(uncheckedBox)
+          checkBoxHolder.appendChild(incomplete)
         } else {
-          const checkedBox = document.importNode(checkedBoxTemp)
-          checkBoxHolder.appendChild(checkedBox)
+          const completed = document.importNode(checkedBox)
+          checkBoxHolder.appendChild(completed)
         }
         const cardClone = document.importNode(taskCard, true)
         taskArea.appendChild(cardClone)
