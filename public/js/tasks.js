@@ -1,5 +1,12 @@
 const nextTask = document.querySelector("#nextTask")
-
+const taskID = document.querySelector("#taskID")
+const taskArea = document.querySelector("#taskArea")
+const taskDesc = document.querySelector("#taskDesc")
+const taskCard = document.getElementById("#taskCard")
+const taskTitle = document.querySelector("#taskTitle")
+const checkedBox = document.querySelector("#checkedBox")
+const uncheckedBox = document.querySelector("#uncheckedBox")
+const checkBoxHolder = document.querySelector("#checkBoxHolder")
 const host = window.location.host
 const protocol = window.location.protocol
 
@@ -17,22 +24,15 @@ async function initialLoad() {
           Authorization: `Bearer ${token}`,
       },
   }
-  console.log("initial load")
+  
   let response = await fetch(url, options)
+
 
   if (response.ok) {
       if (response.status === 200) {
-        const taskID = document.querySelector("#taskID")
-        const taskArea = document.querySelector("#taskArea")
-        const taskDesc = document.querySelector("#taskDesc")
-        const taskCard = document.getElementById("#taskCard")
-        const taskTitle = document.querySelector("#taskTitle")
-        const checkedBox = document.querySelector("#checkedBox")
-        const uncheckedBox = document.querySelector("#uncheckedBox")
-        const checkBoxHolder = document.querySelector("#checkBoxHolder")
-
+        console.log(skip)
         const data = await response.json()
-        console.log(response)
+        console.log(data)
         taskTitle.innerHTML = `${data.title}`
         taskDesc.innerHTML = `${data.description}`
         taskID.innerHTML = `${data._id}`
