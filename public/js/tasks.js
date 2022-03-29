@@ -33,7 +33,7 @@ async function initialLoad() {
   if (response.ok) {
       if (response.status === 200) {
         const data = await response.json()
-
+        console.log(response)
         taskTitle.innerHTML = `${data.title}`
         taskDesc.innerHTML = `${data.description}`
         taskID.innerHTML = `${data._id}`
