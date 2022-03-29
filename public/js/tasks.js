@@ -37,7 +37,7 @@ async function initialLoad() {
       if (response.status === 200) {
         console.log(skip)
         const data = await response.json()
-        console.log(data._id)
+        console.log(data[0]._id)
         taskTitle.innerHTML = `${data.title}`
         taskDesc.innerHTML = `${data.description}`
         taskID.innerHTML = `${data._id}`
