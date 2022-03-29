@@ -16,6 +16,6 @@
 
 .card-text { grid-area: card-text; }
 
-#modifyTask { grid-area: modfyTask; }
+#modifyTask { grid-area: modifyTask; }
 
 #deleteTask { grid-area: deleteTask; }
