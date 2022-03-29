@@ -16,7 +16,7 @@ const checkBoxHolder = document.querySelector('checkBoxHolder')
 const skip = 0
 const limit = 1
 
-function initialLoad() {
+async function initialLoad() {
   const token = localStorage.getItem("token")
 
   const url = `https://nbritton-api-app.herokuapp.com/tasks?skip=${skip}&limit=${limit}`
