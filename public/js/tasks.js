@@ -1,12 +1,15 @@
 const nextTask = document.querySelector("#nextTask")
-const taskID = document.querySelector("#taskID")
-const taskArea = document.querySelector("#taskArea")
-const taskDesc = document.querySelector("#taskDesc")
-const taskCard = document.getElementById("#taskCard")
-const taskTitle = document.querySelector("#taskTitle")
-const checkedBox = document.querySelector("#checkedBox")
-const uncheckedBox = document.querySelector("#uncheckedBox")
-const checkBoxHolder = document.querySelector("#checkBoxHolder")
+const taskCard = document.querySelector("#taskCard")
+
+const taskID = taskCard.content.querySelector("#taskID")
+const taskArea = taskCard.content.querySelector("#taskArea")
+const taskDesc = taskCard.content.querySelector("#taskDesc")
+const taskTitle = taskCard.content.querySelector("#taskTitle")
+const checkBoxHolder = taskCard.content.querySelector("#checkBoxHolder")
+
+const checkedBoxTemp = document.querySelector("#checkedBox")
+const uncheckedBoxTemp = document.querySelector("#uncheckedBox")
+
 const host = window.location.host
 const protocol = window.location.protocol
 
@@ -38,8 +41,10 @@ async function initialLoad() {
         taskID.innerHTML = `${data._id}`
 
         if (data.completed === false) {
+          const uncheckedBox = document.importNode(uncheckedBoxTemp)
           checkBoxHolder.appendChild(uncheckedBox)
         } else {
+          const checkedBox = document.importNode(checkedBoxTemp)
           checkBoxHolder.appendChild(checkedBox)
         }
         const cardClone = document.importNode(taskCard, true)
@@ -76,11 +81,15 @@ nextTask.addEventListener("click", async(e) => {
         console.log(data)
         taskTitle.innerHTML = `${data.title}`
         taskDesc.innerHTML = `${data.description}`
-        if (data.completed == 'false') {
+
+        if (data.completed === false) {
+          const uncheckedBox = document.importNode(uncheckedBoxTemp)
           checkBoxHolder.appendChild(uncheckedBox)
         } else {
+          const checkedBox = document.importNode(checkedBoxTemp)
           checkBoxHolder.appendChild(checkedBox)
         }
+        
         const cardClone = document.importNode(taskCard, true)
         container.appendChild(cardClone)
         skip++
