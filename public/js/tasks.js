@@ -1,12 +1,13 @@
 const nextTask = document.querySelector("#nextTask")
 const cardTemp = document.querySelector("#taskCard")
 const taskArea = document.querySelector("#taskArea")
-const taskCard = cardTemp.content.querySelector(".card") ;
-console.log(taskCard)
-//const taskID = taskCard.content.querySelector("#taskID")
-const taskDesc = taskCard.content.querySelector("#taskDesc")
-const taskTitle = taskCard.content.querySelector("#taskTitle")
-const checkBoxHolder = taskCard.content.querySelector("#checkBoxHolder")
+const taskCard = cardTemp.content.querySelector(".card")
+const cardContent = taskCard.content.querySelector(".card-body")
+
+const taskID = cardContent.content.querySelector("#taskID")
+const taskDesc = cardContent.content.querySelector("#taskDesc")
+const taskTitle = cardContent.content.querySelector("#taskTitle")
+const checkBoxHolder = cardContent.content.querySelector("#checkBoxHolder")
 
 const checkedBoxTemp = document.querySelector("#checkedBox")
 const uncheckedBoxTemp = document.querySelector("#uncheckedBox")
