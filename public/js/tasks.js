@@ -91,6 +91,7 @@ nextTask.addEventListener("click", async(e) => {
         }
 
         const cardClone = document.importNode(taskCard, true)
+        console.log(cardClone)
         taskArea.appendChild(cardClone)
         skip++
       }
