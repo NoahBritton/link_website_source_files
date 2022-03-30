@@ -42,7 +42,7 @@ async function initialLoad() {
         taskTitle.innerHTML = `${data[0].title}`
         taskDesc.innerHTML = `${data[0].description}`
         taskID.innerHTML = `${data[0]._id}`
-
+        checkBoxHolder.innerHTML = null
         if (data[0].completed === false) {
           const incomplete = document.importNode(uncheckedBox, true)
           checkBoxHolder.appendChild(incomplete)
