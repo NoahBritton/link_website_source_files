@@ -1,11 +1,11 @@
 <template id="taskCard">
   <div class="card" style="width: 18rem;">
-    <div class="card-body">
+    <div class="card-body" id="card-body">
       <h5 class="card-title" id="taskTitle"></h5>
       <div id="checkBoxHolder"></div>
       <p class="card-text" id="taskDesc"></p>
-      <button style="background-color:rgb(223, 47, 47)" type="button" class="deleteTask" id="deleteTask">delete</button>
-      <button style="background-color:rgb(33, 33, 151)" type="button" class="modifyTask" id="modifyTask">modify</button>
+      <button style="background-color:rgb(209, 88, 88)" type="button" class="deleteTask" id="deleteTask">delete</button>
+      <button style="background-color:rgb(71, 71, 194)" type="button" class="modifyTask" id="modifyTask">modify</button>
       <p id="taskID" style="display: none;"></p>
     </div>
   </div>
@@ -22,5 +22,43 @@
   <div class="form-check">
     <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled>
     <label class="form-check-label" for="flexCheckDisabled"></label>
+  </div>
+</template>
+
+<template id="createTaskCard">
+  <div class="card" style="width: 18rem;">
+
+    <div class="card-body">
+
+      <h5 class="card-title" id="taskTitle">
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Title</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+        </div>
+      </h5>
+
+      <p class="card-text" id="taskDesc">
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Description</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+        </div>
+      </p>
+
+      <div id="checkBoxHolder">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault">
+          </label>
+        </div>
+      </div>
+      
+      <p id="taskID" style="display: none;"></p>
+
+    </div>
+
   </div>
 </template>

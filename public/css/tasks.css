@@ -4,7 +4,7 @@
 .card {
   color: rgb(36, 36, 36);
 }
-.card-body {
+#card-body {
   display: grid;
   grid-template-columns: 1.6fr 0.4fr;
   grid-template-rows: 0.5fr 0.5fr;
