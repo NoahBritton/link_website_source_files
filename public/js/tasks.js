@@ -80,7 +80,7 @@ nextTask.addEventListener("click", async(e) => {
       if (response.status === 200) {
         const data = await response.json()
 
-        const checkBox = checkBoxHolder.content.querySelector(".form-check")
+        const checkBox = checkBoxHolder.querySelector("div")
         checkBox.remove();
         taskTitle.innerHTML = `${data[0].title}`
         taskDesc.innerHTML = `${data[0].description}`
