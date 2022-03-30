@@ -44,10 +44,10 @@ async function initialLoad() {
         taskID.innerHTML = `${data[0]._id}`
 
         if (data[0].completed === false) {
-          const incomplete = document.importNode(uncheckedBox)
+          const incomplete = document.importNode(uncheckedBox, true)
           checkBoxHolder.appendChild(incomplete)
         } else {
-          const completed = document.importNode(checkedBox)
+          const completed = document.importNode(checkedBox, true)
           checkBoxHolder.appendChild(completed)
         }
         const cardClone = document.importNode(taskCard, true)
