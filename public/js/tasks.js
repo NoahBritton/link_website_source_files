@@ -42,7 +42,7 @@ async function initialLoad() {
         taskTitle.innerHTML = `${data[0].title}`
         taskDesc.innerHTML = `${data[0].description}`
         taskID.innerHTML = `${data[0]._id}`
-        checkBoxHolder.innerHTML = null
+
         if (data[0].completed === false) {
           const incomplete = document.importNode(uncheckedBox, true)
           checkBoxHolder.appendChild(incomplete)
@@ -52,6 +52,7 @@ async function initialLoad() {
         }
         const cardClone = document.importNode(taskCard, true)
         taskArea.appendChild(cardClone)
+        
         skip++
       }
   } else {
@@ -59,8 +60,6 @@ async function initialLoad() {
   }
 }
 
-
-// display a task on load
 nextTask.addEventListener("click", async(e) => {
   e.preventDefault()
 
@@ -81,16 +80,18 @@ nextTask.addEventListener("click", async(e) => {
       if (response.status === 200) {
         const data = await response.json()
 
+        const checkBox = checkBoxHolder.content.querySelector(".form-check")
+        checkBox.remove();
         taskTitle.innerHTML = `${data[0].title}`
         taskDesc.innerHTML = `${data[0].description}`
         taskID.innerHTML = `${data[0]._id}`
 
         if (data[0].completed === false) {
-          const uncheckedBox = document.importNode(uncheckedBoxTemp)
-          checkBoxHolder.appendChild(uncheckedBox)
+          const incomplete = document.importNode(uncheckedBox, true)
+          checkBoxHolder.appendChild(incomplete)
         } else {
-          const checkedBox = document.importNode(checkedBoxTemp)
-          checkBoxHolder.appendChild(checkedBox)
+          const completed = document.importNode(checkedBox, true)
+          checkBoxHolder.appendChild(completed)
         }
 
         const cardClone = document.importNode(taskCard, true)
