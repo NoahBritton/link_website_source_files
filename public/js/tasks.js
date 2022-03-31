@@ -24,9 +24,9 @@ const newTaskTemp = document.querySelector("#createTaskCard")
 const newTaskCard = newTaskTemp.content.querySelector("#newTaskArea")
 const newTaskContent = newTaskCard.querySelector(".card-body")
   // inputs
-const titleInput = newCardContent.querySelector("#titleInput")
-const descInput = newCardContent.querySelector("#descInput")
-const checkBox = newCardContent.querySelector("#flexCheckDefault")
+const titleInput = newTaskContent.querySelector("#titleInput")
+const descInput = newTaskContent.querySelector("#descInput")
+const checkBox = newTaskContent.querySelector("#flexCheckDefault")
 
 const host = window.location.host
 const protocol = window.location.protocol
