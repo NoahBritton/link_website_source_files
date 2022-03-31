@@ -46,7 +46,8 @@ newTask.addEventListener("click", function () {
   }
 });
 
-createNewTask.addEventListener("click", async (e) => {
+createNewTask.addEventListener("click", async(e) => {
+  console.log("button pressed")
   e.preventDefault()
 
   const title = titleInput.value;
@@ -63,7 +64,7 @@ createNewTask.addEventListener("click", async (e) => {
     },
     body: JSON.stringify(data)
   }
-
+  console.log(options)
   let response = await fetch(url, options)
 
   if (response.ok) {
