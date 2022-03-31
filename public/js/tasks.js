@@ -47,9 +47,9 @@ newTask.addEventListener("click", function () {
 
 async function submitNewTask() {
   const token = localStorage.getItem("token")
-  const title = titleInput.value
-  const description = descInput.value
-  const completed = checkBox.checked
+  const title = document.getElementById("titleInput").value
+  const description = document.getElementById("descInput").value
+  const completed = document.getElementById("flexCheckDefault").value
   let data = { title, description, completed }
 
   const url = 'https://nbritton-api-app.herokuapp.com/tasks'
