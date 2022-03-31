@@ -5,7 +5,6 @@ const newTask = document.querySelector("#newTask")
 /* Empty task card */
   // areas
 const cardTemp = document.querySelector("#taskCard")
-const taskArea = document.querySelector("#taskArea")
 const taskCard = cardTemp.content.querySelector(".card")
 const cardContent = taskCard.querySelector(".card-body")
   // specific content areas
@@ -21,10 +20,9 @@ const uncheckedBox = uncheckedBoxTemp.content.querySelector(".form-check")
 
 /* New task card */
   // areas
-const newCardTemp = document.querySelector("#createTaskCard")
-const newTaskArea = document.querySelector("#newTaskArea")
-const newTaskCard = newCardTemp.content.querySelector(".card")
-const newCardContent = taskCard.querySelector(".card-body")
+const newTaskTemp = document.querySelector("#createTaskCard")
+const newTaskCard = newTaskTemp.content.querySelector("#newTaskArea")
+const newTaskContent = newTaskCard.querySelector(".card-body")
   // inputs
 const titleInput = newCardContent.querySelector("#titleInput")
 const descInput = newCardContent.querySelector("#descInput")
@@ -38,11 +36,11 @@ var creatingTask = false
 const limit = 1
 
 newTask.addEventListener("click", function() {
-  const newTaskCardClone = document.importNode(newTaskArea, true)
+  const newTaskCardClone = document.importNode(newTaskCard, true)
   console.log(newTaskCardClone)
   if (!creatingTask) {
     creatingTask = true
-    taskArea.appendChild(newTaskCardClone)
+    taskArea.prepend(newTaskCardClone)
   }
 });
 
