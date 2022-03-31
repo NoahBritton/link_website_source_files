@@ -28,7 +28,7 @@ const titleInput = newTaskContent.querySelector("#titleInput")
 const descInput = newTaskContent.querySelector("#descInput")
 const checkBox = newTaskContent.querySelector("#flexCheckDefault")
 // button
-const createNewTask = newTaskContent.querySelector("#createNewTask")
+const submitNewTask = newTaskContent.querySelector("button")
 
 const host = window.location.host
 const protocol = window.location.protocol
@@ -46,54 +46,9 @@ newTask.addEventListener("click", function () {
   }
 });
 
-createNewTask.addEventListener("click", async(e) => {
-  console.log("button pressed")
+submitNewTask.addEventListener("submit", async(e) => {
   e.preventDefault()
-
-  const title = titleInput.value;
-  const description = descInput.value;
-  const completed = checkBox.checked;
-  let data = { title, description, completed }
-
-  const url = 'https://nbritton-api-app.herokuapp.com/tasks'
-
-  const options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data)
-  }
-  console.log(options)
-  let response = await fetch(url, options)
-
-  if (response.ok) {
-    if (response.status === 200) {
-      const data = await response.json()
-      const checkBox = checkBoxHolder.querySelector("div")
-      checkBox.remove();
-      taskTitle.innerHTML = `${data[0].title}`
-      taskDesc.innerHTML = `${data[0].description}`
-      taskID.innerHTML = `${data[0]._id}`
-
-      if (data[0].completed === false) {
-        const incomplete = document.importNode(uncheckedBox, true)
-        checkBoxHolder.appendChild(incomplete)
-      } else {
-        const completed = document.importNode(checkedBox, true)
-        checkBoxHolder.appendChild(completed)
-      }
-
-      const cardClone = document.importNode(taskCard, true)
-      console.log(cardClone)
-      newTaskCard.remove()
-      taskArea.prepend(cardClone)
-      skip++
-      creatingTask = false
-    }
-  } else {
-    console.log("HTTP-Error: " + response.status)
-  }
+  console.log("button pressed")
 });
 
 async function initialLoad() {
