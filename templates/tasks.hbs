@@ -9,18 +9,13 @@
   {{> head}}
   <link href="css/tasks.css" rel="stylesheet" type="text/css">
   <script defer src="js/tasks.js"></script>
-  <script defer>
-    $("#descInput").click(function(){
-      $('#descModal').modal('show')
-    });
-  </script>
   <title>Tasks</title>
 </head>
 
 <body onload="initialLoad()">
   {{> header}}
   <main role="main" class="container">
-    <button style="background-color:rgb(47, 223, 71)" type="button" id="newTask">Create New Task</button>
+    <button style="background-color:rgb(47, 223, 71)" type="button" id="newTask">New Task</button>
     <div id="taskArea"></div>
     <button style="background-color:rgb(47, 188, 223)" type="button" id="nextTask">Load Next</button>
   </main>
