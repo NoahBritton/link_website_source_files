@@ -49,7 +49,7 @@ async function submitNewTask() {
   const token = localStorage.getItem("token")
   const title = document.getElementById("titleInput").value
   const description = document.getElementById("descInput").value
-  const completed = document.getElementById("flexCheckDefault").value
+  const completed = document.getElementById("flexCheckDefault").checked
   let data = { title, description, completed }
 
   const url = 'https://nbritton-api-app.herokuapp.com/tasks'
