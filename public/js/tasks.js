@@ -27,8 +27,7 @@ const newTaskContent = newTaskCard.querySelector(".card-body")
 const titleInput = newTaskContent.querySelector("#titleInput")
 const descInput = newTaskContent.querySelector("#descInput")
 const checkBox = newTaskContent.querySelector("#flexCheckDefault")
-// button
-const submitNewTask = newTaskContent.querySelector("button")
+
 
 const host = window.location.host
 const protocol = window.location.protocol
