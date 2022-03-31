@@ -34,7 +34,7 @@ const protocol = window.location.protocol
 
 var skip = 0
 var creatingTask = false
-var limit =  1
+var limit = 1
 var ids = []
 
 newTask.addEventListener("click", function () {
@@ -151,32 +151,33 @@ nextTask.addEventListener("click", async (e) => {
   }
 
   let response = await fetch(url, options)
+  const data = await response.json()
+  if (ids.includes(data[0]._id)) {
+    if (response.ok) {
+      if (response.status === 200) {
 
-  if (response.ok) {
-    if (response.status === 200) {
-      const data = await response.json()
+        const checkBox = checkBoxHolder.querySelector("div")
+        checkBox.remove();
+        taskTitle.innerHTML = `${data[0].title}`
+        taskDesc.innerHTML = `${data[0].description}`
+        taskID.innerHTML = `${data[0]._id}`
+        ids[skip] = data[0]._id
+        if (data[0].completed === false) {
+          const incomplete = document.importNode(uncheckedBox, true)
+          checkBoxHolder.appendChild(incomplete)
+        } else {
+          const completed = document.importNode(checkedBox, true)
+          checkBoxHolder.appendChild(completed)
+        }
 
-      const checkBox = checkBoxHolder.querySelector("div")
-      checkBox.remove();
-      taskTitle.innerHTML = `${data[0].title}`
-      taskDesc.innerHTML = `${data[0].description}`
-      taskID.innerHTML = `${data[0]._id}`
-      ids[skip] = data[0]._id
-      if (data[0].completed === false) {
-        const incomplete = document.importNode(uncheckedBox, true)
-        checkBoxHolder.appendChild(incomplete)
-      } else {
-        const completed = document.importNode(checkedBox, true)
-        checkBoxHolder.appendChild(completed)
+        const cardClone = document.importNode(taskCard, true)
+        console.log(cardClone)
+        taskArea.appendChild(cardClone)
+        skip++
       }
-
-      const cardClone = document.importNode(taskCard, true)
-      console.log(cardClone)
-      taskArea.appendChild(cardClone)
-      skip++
+    } else {
+      console.log("HTTP-Error: " + response.status)
     }
-  } else {
-    console.log("HTTP-Error: " + response.status)
   }
 })
 
