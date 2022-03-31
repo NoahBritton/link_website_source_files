@@ -35,6 +35,7 @@ const protocol = window.location.protocol
 var skip = 0
 var creatingTask = false
 var limit =  1
+var ids = []
 
 newTask.addEventListener("click", function () {
   const newTaskCardClone = document.importNode(newTaskCard, true)
@@ -73,6 +74,7 @@ async function submitNewTask() {
       taskTitle.innerHTML = `${data.title}`
       taskDesc.innerHTML = `${data.description}`
       taskID.innerHTML = `${data._id}`
+      ids[skip] = data._id
 
       if (data.completed === false) {
         const incomplete = document.importNode(uncheckedBox, true)
@@ -116,7 +118,7 @@ async function initialLoad() {
       taskTitle.innerHTML = `${data[0].title}`
       taskDesc.innerHTML = `${data[0].description}`
       taskID.innerHTML = `${data[0]._id}`
-
+      ids[skip] = data[0]._id
       if (data[0].completed === false) {
         const incomplete = document.importNode(uncheckedBox, true)
         checkBoxHolder.appendChild(incomplete)
@@ -159,7 +161,7 @@ nextTask.addEventListener("click", async (e) => {
       taskTitle.innerHTML = `${data[0].title}`
       taskDesc.innerHTML = `${data[0].description}`
       taskID.innerHTML = `${data[0]._id}`
-
+      ids[skip] = data[0]_id
       if (data[0].completed === false) {
         const incomplete = document.importNode(uncheckedBox, true)
         checkBoxHolder.appendChild(incomplete)
