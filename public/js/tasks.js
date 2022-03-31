@@ -46,7 +46,7 @@ newTask.addEventListener("click", function () {
   }
 });
 
-createNewTask.addEventListener('click', async (e) => {
+createNewTask.addEventListener("click", async (e) => {
   e.preventDefault()
 
   const title = titleInput.value;
