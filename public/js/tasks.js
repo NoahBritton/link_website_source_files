@@ -84,7 +84,8 @@ async function submitNewTask() {
 
       const cardClone = document.importNode(taskCard, true)
       console.log(cardClone)
-      newTaskCard.remove()
+      const newcard = document.getElementById('newTaskArea')
+      newcard.remove()
       taskArea.prepend(cardClone)
       skip++
       creatingTask = false
