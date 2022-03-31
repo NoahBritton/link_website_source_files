@@ -66,7 +66,7 @@ async function submitNewTask() {
   let response = await fetch(url, options)
 
   if (response.ok) {
-    if (response.status === 200) {
+    if (response.status === 201) {
       const data = await response.json()
       const checkBox = checkBoxHolder.querySelector("div")
       checkBox.remove();
