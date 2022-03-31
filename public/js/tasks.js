@@ -24,7 +24,7 @@ const uncheckedBox = uncheckedBoxTemp.content.querySelector(".form-check")
 const newCardTemp = document.querySelector("#createTaskCard")
 const newTaskArea = document.querySelector("#newTaskArea")
 const newTaskCard = newCardTemp.content.querySelector(".card")
-const newCardContent = taskCard.querySelector(".card-bdy")
+const newCardContent = taskCard.querySelector(".card-body")
   // inputs
 const titleInput = newCardContent.querySelector("#titleInput")
 const descInput = newCardContent.querySelector("#descInput")
