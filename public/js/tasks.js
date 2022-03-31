@@ -1,7 +1,6 @@
 /* Buttons */
 const nextTask = document.querySelector("#nextTask")
 const newTask = document.querySelector("#newTask")
-const createNewTask = newTaskContent.querySelector("#createNewTask")
 
 /* Empty task card */
 // areas
@@ -28,12 +27,15 @@ const newTaskContent = newTaskCard.querySelector(".card-body")
 const titleInput = newTaskContent.querySelector("#titleInput")
 const descInput = newTaskContent.querySelector("#descInput")
 const checkBox = newTaskContent.querySelector("#flexCheckDefault")
+// button
+const createNewTask = newTaskContent.querySelector("#createNewTask")
 
 const host = window.location.host
 const protocol = window.location.protocol
 
 var skip = 0
 var creatingTask = false
+var limit =  1
 
 newTask.addEventListener("click", function () {
   const newTaskCardClone = document.importNode(newTaskCard, true)
@@ -95,7 +97,7 @@ createNewTask.addEventListener('submit', async (e) => {
 
 async function initialLoad() {
   const token = localStorage.getItem("token")
-  const url = `https://nbritton-api-app.herokuapp.com/tasks?skip=${num}&limit=${limit}`
+  const url = `https://nbritton-api-app.herokuapp.com/tasks?skip=${skip}&limit=${limit}`
 
   console.log(url)
   const options = {
