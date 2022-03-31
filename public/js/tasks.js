@@ -152,7 +152,7 @@ nextTask.addEventListener("click", async (e) => {
 
   let response = await fetch(url, options)
   const data = await response.json()
-  if (ids.includes(data[0]._id)) {
+  if (!(ids.includes(data[0]._id))) {
     if (response.ok) {
       if (response.status === 200) {
 
