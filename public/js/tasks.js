@@ -70,11 +70,11 @@ async function submitNewTask() {
       const data = await response.json()
       const checkBox = checkBoxHolder.querySelector("div")
       checkBox.remove();
-      taskTitle.innerHTML = `${data[0].title}`
-      taskDesc.innerHTML = `${data[0].description}`
-      taskID.innerHTML = `${data[0]._id}`
+      taskTitle.innerHTML = `${data.title}`
+      taskDesc.innerHTML = `${data.description}`
+      taskID.innerHTML = `${data._id}`
 
-      if (data[0].completed === false) {
+      if (data.completed === false) {
         const incomplete = document.importNode(uncheckedBox, true)
         checkBoxHolder.appendChild(incomplete)
       } else {
