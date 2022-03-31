@@ -46,10 +46,52 @@ newTask.addEventListener("click", function () {
   }
 });
 
-submitNewTask.addEventListener("submit", async(e) => {
-  e.preventDefault()
-  console.log("button pressed")
-});
+async function submitNewTask() {
+  const title = titleInput.value;
+  const description = descInput.value;
+  const completed = checkBox.checked;
+  let data = { title, description, completed }
+
+  const url = 'https://nbritton-api-app.herokuapp.com/tasks'
+
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data)
+  }
+  console.log(options)
+  let response = await fetch(url, options)
+
+  if (response.ok) {
+    if (response.status === 200) {
+      const data = await response.json()
+      const checkBox = checkBoxHolder.querySelector("div")
+      checkBox.remove();
+      taskTitle.innerHTML = `${data[0].title}`
+      taskDesc.innerHTML = `${data[0].description}`
+      taskID.innerHTML = `${data[0]._id}`
+
+      if (data[0].completed === false) {
+        const incomplete = document.importNode(uncheckedBox, true)
+        checkBoxHolder.appendChild(incomplete)
+      } else {
+        const completed = document.importNode(checkedBox, true)
+        checkBoxHolder.appendChild(completed)
+      }
+
+      const cardClone = document.importNode(taskCard, true)
+      console.log(cardClone)
+      newTaskCard.remove()
+      taskArea.prepend(cardClone)
+      skip++
+      creatingTask = false
+    }
+  } else {
+    console.log("HTTP-Error: " + response.status)
+  }
+}
 
 async function initialLoad() {
   const token = localStorage.getItem("token")
