@@ -156,6 +156,9 @@ nextTask.addEventListener("click", async (e) => {
 
   let response = await fetch(url, options)
   const data = await response.json()
+  console.log(`current task: ${data[0]._id}`)
+  console.log(ids)
+  console.log(`is this task in the array already? [${ids.includes(data[0].id)}]`)
   if (!(ids.includes(data[0]._id))) {
     if (response.ok) {
       if (response.status === 200) {
