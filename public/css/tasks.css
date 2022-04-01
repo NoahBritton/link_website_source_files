@@ -21,4 +21,4 @@
 
 #modifyTask { grid-area: modifyTask; }
 
-#deleteTask { grid-area: deleteTask; }
+.deleteTask { grid-area: deleteTask; }
