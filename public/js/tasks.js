@@ -35,6 +35,7 @@ var skip = 0
 var creatingTask = false
 var limit = 1
 var ids = []
+var newIds = []
 
 newTask.addEventListener("click", function () {
   const newTaskCardClone = document.importNode(newTaskCard, true)
@@ -79,7 +80,7 @@ async function submitNewTask() {
       taskTitle.innerHTML = `${data.title}`
       taskDesc.innerHTML = `${data.description}`
       taskID.innerHTML = `${data._id}`
-      ids[skip] = data._id
+      newIds[skip] = data._id
 
       if (data.completed === false) {
         const incomplete = document.importNode(uncheckedBox, true)
@@ -158,32 +159,35 @@ nextTask.addEventListener("click", async (e) => {
   const data = await response.json()
   console.log(`current task: ${data[0]._id}`)
   console.log(ids)
-  console.log(`is this task in the array already? [${ids.includes(data[0].id)}]`)
+  console.log(`is this task in the base task array already? [${ids.includes(data[0].id)}]`)
+  console.log(`is this task in the new tasks array already? [${newIds.includes(data[0].id)}]`)
   if (!(ids.includes(data[0]._id))) {
-    if (response.ok) {
-      if (response.status === 200) {
+    if (!(newIds.includes(data[0]._id))) {
+      if (response.ok) {
+        if (response.status === 200) {
 
-        const checkBox = checkBoxHolder.querySelector("div")
-        checkBox.remove();
-        taskTitle.innerHTML = `${data[0].title}`
-        taskDesc.innerHTML = `${data[0].description}`
-        taskID.innerHTML = `${data[0]._id}`
-        ids[skip] = data[0]._id
-        if (data[0].completed === false) {
-          const incomplete = document.importNode(uncheckedBox, true)
-          checkBoxHolder.appendChild(incomplete)
-        } else {
-          const completed = document.importNode(checkedBox, true)
-          checkBoxHolder.appendChild(completed)
+          const checkBox = checkBoxHolder.querySelector("div")
+          checkBox.remove();
+          taskTitle.innerHTML = `${data[0].title}`
+          taskDesc.innerHTML = `${data[0].description}`
+          taskID.innerHTML = `${data[0]._id}`
+          ids[skip] = data[0]._id
+          if (data[0].completed === false) {
+            const incomplete = document.importNode(uncheckedBox, true)
+            checkBoxHolder.appendChild(incomplete)
+          } else {
+            const completed = document.importNode(checkedBox, true)
+            checkBoxHolder.appendChild(completed)
+          }
+
+          const cardClone = document.importNode(taskCard, true)
+          console.log(cardClone)
+          taskArea.appendChild(cardClone)
+          skip++
         }
-
-        const cardClone = document.importNode(taskCard, true)
-        console.log(cardClone)
-        taskArea.appendChild(cardClone)
-        skip++
+      } else {
+        console.log("HTTP-Error: " + response.status)
       }
-    } else {
-      console.log("HTTP-Error: " + response.status)
     }
   }
 })
