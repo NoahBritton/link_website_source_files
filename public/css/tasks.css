@@ -22,3 +22,7 @@
 #modifyTask { grid-area: modifyTask; }
 
 #deleteTask { grid-area: deleteTask; }
+
+#dragElem {
+  position: absolute;
+}
