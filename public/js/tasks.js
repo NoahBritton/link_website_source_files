@@ -18,8 +18,8 @@ const uncheckedBoxTemp = document.querySelector("#uncheckedBox")
 const checkedBox = checkedBoxTemp.content.querySelector(".form-check")
 const uncheckedBox = uncheckedBoxTemp.content.querySelector(".form-check")
 // buttons
-const deleteButton = cardContent.querySelector("#deleteTask")
-const modifyButton = cardContent.querySelector("#modifyTask")
+const deleteButton = cardContent.querySelector(".deleteTask")
+const modifyButton = cardContent.querySelector(".modifyTask")
 
 /* New task card */
 // areas
@@ -89,7 +89,7 @@ async function submitNewTask() {
       taskID.innerHTML = `${data._id}`
       newIds[skip] = data._id
 
-      deleteButton.ID = `${data._id}`
+      deleteButton.id = `${data._id}`
       deleteButton.addEventListener('click', deleteTask(`${data[0]._id}`))
 
       if (data.completed === false) {
@@ -134,7 +134,7 @@ async function initialLoad() {
       taskDesc.innerHTML = `${data[0].description}`
       taskID.innerHTML = `${data[0]._id}`
       ids[skip] = data[0]._id
-      deleteButton.ID = `${data[0]._id}`
+      deleteButton.id = `${data[0]._id}`
       deleteButton.addEventListener('click', deleteTask(`${data[0]._id}`))
       if (data[0].completed === false) {
         const incomplete = document.importNode(uncheckedBox, true)
@@ -178,10 +178,9 @@ nextTask.addEventListener("click", async (e) => {
           checkBox.remove();
           taskTitle.innerHTML = `${data[0].title}`
           taskDesc.innerHTML = `${data[0].description}`
-          taskID.id = `${data[0]._id}`
           taskID.innerHTML = `${data[0]._id}`
           ids[skip] = data[0]._id
-          deleteButton.ID = `${data[0]._id}`
+          deleteButton.id = `${data[0]._id}`
           deleteButton.addEventListener('click', deleteTask(`${data[0]._id}`))
           if (data[0].completed === false) {
             const incomplete = document.importNode(uncheckedBox, true)
