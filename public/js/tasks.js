@@ -94,7 +94,6 @@ async function submitNewTask() {
       const newcard = document.getElementById('newTaskArea')
       newcard.remove()
       taskArea.prepend(cardClone)
-      skip++
       creatingTask = false
     }
   } else {
