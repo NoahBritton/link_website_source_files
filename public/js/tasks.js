@@ -48,7 +48,7 @@ newTask.addEventListener("click", function () {
 });
 
 function cancelTask() {
-  const elm = document.getElementById("taskArea")
+  const elm = document.getElementById("newTaskArea")
   elm.remove()
   creatingTask = false
 }
