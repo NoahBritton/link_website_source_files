@@ -51,8 +51,8 @@ function setEventHandler(obj, name, fn) {
   }
 }
 
-async function deleteTask() {
-  console.log(this.value)
+async function deleteTask(id) {
+  console.log(id)
 }
 
 newTask.addEventListener("click", function () {
@@ -100,7 +100,8 @@ async function submitNewTask() {
       taskID.innerHTML = `${data._id}`
       newIds[skip] = data._id
 
-      deleteButton.value = data._id
+      deleteButton.id = `${data[0]._id}`
+      deleteButton.onclick = deleteTask(`${data[0]._id}`)
 
       if (data.completed === false) {
         const incomplete = document.importNode(uncheckedBox, true)
@@ -144,7 +145,8 @@ async function initialLoad() {
       taskDesc.innerHTML = `${data[0].description}`
       taskID.innerHTML = `${data[0]._id}`
       ids[skip] = data[0]._id
-      deleteButton.value = data[0]._id
+      deleteButton.id = `${data[0]._id}`
+      deleteButton.onclick = deleteTask(`${data[0]._id}`)
       if (data[0].completed === false) {
         const incomplete = document.importNode(uncheckedBox, true)
         checkBoxHolder.appendChild(incomplete)
@@ -187,10 +189,11 @@ nextTask.addEventListener("click", async (e) => {
           checkBox.remove();
           taskTitle.innerHTML = `${data[0].title}`
           taskDesc.innerHTML = `${data[0].description}`
+          taskID.id = `${data[0]._id}`
           taskID.innerHTML = `${data[0]._id}`
           ids[skip] = data[0]._id
-          deleteButton.value = data[0]._id
-          setEventHandler(deleteButton, "onclick", deleteTask)
+          deleteButton.id = `${data[0]._id}`
+          deleteButton.onclick = deleteTask(`${data[0]._id}`)
           if (data[0].completed === false) {
             const incomplete = document.importNode(uncheckedBox, true)
             checkBoxHolder.appendChild(incomplete)
