@@ -1,3 +1,4 @@
+const arrive = require('arrive')
 /* Buttons */
 const nextTask = document.querySelector("#nextTask")
 const newTask = document.querySelector("#newTask")
@@ -5,7 +6,7 @@ const newTask = document.querySelector("#newTask")
 /* Empty task card */
 // areas
 const cardTemp = document.querySelector("#taskCard")
-const taskCard = cardTemp.content.querySelector("#dragElem")
+const taskCard = cardTemp.content.querySelector("#dragElm")
 const cardContent = taskCard.querySelector(".card-body")
 // specific content areas
 const taskID = cardContent.querySelector("#taskID")
@@ -187,34 +188,38 @@ nextTask.addEventListener("click", async (e) => {
 })
 
 /* draggable cards */
-var mousePosition;
-var offset = [0,0];
-var div = document.getElementById("dragElem");
-var isDown = false;
+
+document.getElementsByClassName("#taskArea").arrive.arrive("#dragElem", function () {
+  var mousePosition;
+  var offset = [0, 0];
+
+  var div = document.getElementById("dragElem");
+  var isDown = false;
 
 
-div.addEventListener('mousedown', function(e) {
+  div.addEventListener('mousedown', function (e) {
     isDown = true;
     offset = [
-        div.offsetLeft - e.clientX,
-        div.offsetTop - e.clientY
+      div.offsetLeft - e.clientX,
+      div.offsetTop - e.clientY
     ];
-}, true);
+  }, true);
 
-document.addEventListener('mouseup', function() {
+  document.addEventListener('mouseup', function () {
     isDown = false;
-}, true);
+  }, true);
 
-document.addEventListener('mousemove', function(event) {
+  document.addEventListener('mousemove', function (event) {
     event.preventDefault();
     if (isDown) {
-        mousePosition = {
-    
-            x : event.clientX,
-            y : event.clientY
-    
-        };
-        div.style.left = (mousePosition.x + offset[0]) + 'px';
-        div.style.top  = (mousePosition.y + offset[1]) + 'px';
+      mousePosition = {
+
+        x: event.clientX,
+        y: event.clientY
+
+      };
+      div.style.left = (mousePosition.x + offset[0]) + 'px';
+      div.style.top = (mousePosition.y + offset[1]) + 'px';
     }
-}, true);
+  }, true);
+});
