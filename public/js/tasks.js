@@ -40,17 +40,6 @@ var limit = 1
 var ids = []
 var newIds = []
 
-function setEventHandler(obj, name, fn) {
-  if (typeof obj == "string") {
-      obj = document.getElementById(obj);
-  }
-  if (obj.addEventListener) {
-      return(obj.addEventListener(name, fn));
-  } else if (obj.attachEvent) {
-      return(obj.attachEvent("on" + name, function() {return(fn.call(obj));}));
-  }
-}
-
 async function deleteTask(id) {
   console.log(id)
 }
@@ -100,8 +89,8 @@ async function submitNewTask() {
       taskID.innerHTML = `${data._id}`
       newIds[skip] = data._id
 
-      deleteButton.id = `${data[0]._id}`
-      deleteButton.onclick = deleteTask(`${data[0]._id}`)
+      deleteButton.ID = `${data._id}`
+      deleteButton.addEventListener('click', deleteTask(`${data[0]._id}`))
 
       if (data.completed === false) {
         const incomplete = document.importNode(uncheckedBox, true)
@@ -145,8 +134,8 @@ async function initialLoad() {
       taskDesc.innerHTML = `${data[0].description}`
       taskID.innerHTML = `${data[0]._id}`
       ids[skip] = data[0]._id
-      deleteButton.id = `${data[0]._id}`
-      deleteButton.onclick = deleteTask(`${data[0]._id}`)
+      deleteButton.ID = `${data[0]._id}`
+      deleteButton.addEventListener('click', deleteTask(`${data[0]._id}`))
       if (data[0].completed === false) {
         const incomplete = document.importNode(uncheckedBox, true)
         checkBoxHolder.appendChild(incomplete)
@@ -192,8 +181,8 @@ nextTask.addEventListener("click", async (e) => {
           taskID.id = `${data[0]._id}`
           taskID.innerHTML = `${data[0]._id}`
           ids[skip] = data[0]._id
-          deleteButton.id = `${data[0]._id}`
-          deleteButton.onclick = deleteTask(`${data[0]._id}`)
+          deleteButton.ID = `${data[0]._id}`
+          deleteButton.addEventListener('click', deleteTask(`${data[0]._id}`))
           if (data[0].completed === false) {
             const incomplete = document.importNode(uncheckedBox, true)
             checkBoxHolder.appendChild(incomplete)
