@@ -28,10 +28,8 @@ const titleInput = newTaskContent.querySelector("#titleInput")
 const descInput = newTaskContent.querySelector("#descInput")
 const checkBox = newTaskContent.querySelector("#flexCheckDefault")
 
-
 const host = window.location.host
 const protocol = window.location.protocol
-dragElement(taskCard)
 
 var skip = 0
 var creatingTask = false
