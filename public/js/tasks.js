@@ -20,7 +20,8 @@ const newTask = document.querySelector("#newTask")
 /* Empty task card */
 // areas
 const cardTemp = document.querySelector("#taskCard")
-const taskCard = cardTemp.content.querySelector("#dragElm")
+const draggableElement = cardTemp.content.querySelector("#dragElm")
+const taskCard = draggableElement.content.querySelector(".card")
 const cardContent = taskCard.querySelector(".card-body")
 // specific content areas
 const taskID = cardContent.querySelector("#taskID")
