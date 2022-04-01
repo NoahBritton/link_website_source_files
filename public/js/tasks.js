@@ -40,8 +40,19 @@ var limit = 1
 var ids = []
 var newIds = []
 
+function setEventHandler(obj, name, fn) {
+  if (typeof obj == "string") {
+      obj = document.getElementById(obj);
+  }
+  if (obj.addEventListener) {
+      return(obj.addEventListener(name, fn));
+  } else if (obj.attachEvent) {
+      return(obj.attachEvent("on" + name, function() {return(fn.call(obj));}));
+  }
+}
+
 async function deleteTask() {
-  
+  console.log(this.value)
 }
 
 newTask.addEventListener("click", function () {
@@ -179,6 +190,7 @@ nextTask.addEventListener("click", async (e) => {
           taskID.innerHTML = `${data[0]._id}`
           ids[skip] = data[0]._id
           deleteButton.value = data[0]._id
+          setEventHandler(deleteButton, "onclick", deleteTask)
           if (data[0].completed === false) {
             const incomplete = document.importNode(uncheckedBox, true)
             checkBoxHolder.appendChild(incomplete)
