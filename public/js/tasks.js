@@ -17,6 +17,9 @@ const checkedBoxTemp = document.querySelector("#checkedBox")
 const uncheckedBoxTemp = document.querySelector("#uncheckedBox")
 const checkedBox = checkedBoxTemp.content.querySelector(".form-check")
 const uncheckedBox = uncheckedBoxTemp.content.querySelector(".form-check")
+// buttons
+const deleteButton = cardContent.querySelector("#deleteTask")
+const modifyButton = cardContent.querySelector("#modifyTask")
 
 /* New task card */
 // areas
@@ -36,6 +39,10 @@ var creatingTask = false
 var limit = 1
 var ids = []
 var newIds = []
+
+async function deleteTask() {
+  console.log(deleteButton.value)
+}
 
 newTask.addEventListener("click", function () {
   const newTaskCardClone = document.importNode(newTaskCard, true)
