@@ -41,7 +41,7 @@ var ids = []
 var newIds = []
 
 function deleteTask() {
-  console.log(id)
+  console.log('test')
 }
 
 newTask.addEventListener("click", function () {
@@ -135,7 +135,8 @@ async function initialLoad() {
       taskID.innerHTML = `${data[0]._id}`
       ids[skip] = data[0]._id
       deleteButton.id = `${data._id}`
-      deleteButton.addEventListener('click', deleteTask.bind(null,`${data[0]._id}`))
+      //deleteButton.addEventListener('click', deleteTask.bind(null,`${data[0]._id}`))
+      console.log(deleteButton)
       if (data[0].completed === false) {
         const incomplete = document.importNode(uncheckedBox, true)
         checkBoxHolder.appendChild(incomplete)
