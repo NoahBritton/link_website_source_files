@@ -41,7 +41,7 @@ var ids = []
 var newIds = []
 
 async function deleteTask() {
-  console.log(deleteButton.value)
+  
 }
 
 newTask.addEventListener("click", function () {
@@ -89,6 +89,8 @@ async function submitNewTask() {
       taskID.innerHTML = `${data._id}`
       newIds[skip] = data._id
 
+      deleteButton.value = data._id
+
       if (data.completed === false) {
         const incomplete = document.importNode(uncheckedBox, true)
         checkBoxHolder.appendChild(incomplete)
@@ -131,6 +133,7 @@ async function initialLoad() {
       taskDesc.innerHTML = `${data[0].description}`
       taskID.innerHTML = `${data[0]._id}`
       ids[skip] = data[0]._id
+      deleteButton.value = data[0]._id
       if (data[0].completed === false) {
         const incomplete = document.importNode(uncheckedBox, true)
         checkBoxHolder.appendChild(incomplete)
@@ -164,10 +167,6 @@ nextTask.addEventListener("click", async (e) => {
 
   let response = await fetch(url, options)
   const data = await response.json()
-  console.log(`current task: ${data[0]._id}`)
-  console.log(ids)
-  console.log(`is this task in the base task array already? [${ids.includes(data[0].id)}]`)
-  console.log(`is this task in the new tasks array already? [${newIds.includes(data[0].id)}]`)
   if (!(ids.includes(data[0]._id))) {
     if (!(newIds.includes(data[0]._id))) {
       if (response.ok) {
@@ -179,6 +178,7 @@ nextTask.addEventListener("click", async (e) => {
           taskDesc.innerHTML = `${data[0].description}`
           taskID.innerHTML = `${data[0]._id}`
           ids[skip] = data[0]._id
+          deleteButton.value = data[0]._id
           if (data[0].completed === false) {
             const incomplete = document.importNode(uncheckedBox, true)
             checkBoxHolder.appendChild(incomplete)
