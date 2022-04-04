@@ -28,7 +28,7 @@
 <template id="createTaskCard">
   <div class="card" style="width: 18rem;" id="newTaskArea">
 
-    <div class="card-body">
+    <div class="card-body" id="createTaskCard">
 
       <h5 class="card-title" id="taskTitle">
         <div class="input-group input-group-sm mb-3" id = "titleInputGroup">
@@ -56,35 +56,10 @@
         </div>
       </div>
 
-      <button style="background-color:rgb(223, 47, 47)" type="button" id="cancelTask" onclick="cancelTask()">Cancel</button>
-      <button style="background-color:rgb(47, 223, 71)" type="button" id="submitNewTask" onclick="submitNewTask()">Submit</button>
+      <button style="background-color:rgb(223, 47, 47)" type="button" id="cancelTask" class="cancelTask">Cancel</button>
+      <button style="background-color:rgb(47, 223, 71)" type="button" id="submitNewTask" class="submitNewTask">Submit</button>
 
     </div>
 
   </div>
 </template>
-
-<div class="modal fade" id="descModal" tabindex="-1" role="dialog" aria-labelledby="descModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="descModalLabel">Please enter a description</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Description:</label>
-            <textarea class="form-control" id="message-text"></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="saveDesc">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
