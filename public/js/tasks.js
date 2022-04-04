@@ -50,6 +50,7 @@ function drag() {
   } else {
     draggable = false
   }
+  console.log(draggable)
 }
 
 function exists(elem) {
@@ -74,7 +75,7 @@ function cancelModify(id) {
 
 function modifyTask(id) {
   const modifiedCard = document.getElementById(`card_${id.split("_").pop()}`)
-  const modifyCard = document.importNode(newTaskCard, true)
+  const modifyCard = document.importNode(newTaskContent, true)
   modifyCard.id = "modifyTaskArea"
   modifyCard.querySelector("#titleInput").value = modifiedCard.querySelector("#taskTitle").innerHTML
   modifyCard.querySelector("#descInput").value = modifiedCard.querySelector("#taskDesc").innerHTML
@@ -391,12 +392,15 @@ taskArea.addEventListener('click', function (e) {
   if (e.target.classList.contains('cancelModify')) {
     cancelModify(e.target.id)
   }
-  if (e.target.classList.contains('flexCheckDrag')) {
+  if (document.querySelector("#flexCheckDrag") != null) {
     drag()
   }
-  if (draggable == true) {
-    if (e.target.classList.contains('card')) {
-      makeDraggable(e.target)
-    }
+  if (e.target.className=== "form-control") {
+    e.target.focus()
   }
+    if (draggable == true) {
+      if (e.target.classList.contains('card')) {
+        makeDraggable(e.target)
+      }
+    }
 })
