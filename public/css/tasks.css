@@ -4,7 +4,20 @@
 .card {
   color: rgb(36, 36, 36);
   padding: 10px;
-  background-color: rgb(0, 0, 0)
+  background-color: #25283d
+}
+
+button {
+  border: none;
+  border-radius: 4px;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+#completedButton {
+  margin-left: 20px;
 }
 
 #card-body {
@@ -12,7 +25,7 @@
 }
 
 #createTaskCard {
-  background-color: rgb(91, 91, 91)
+  background-color: #808080
 }
 
 #card-body {

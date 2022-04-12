@@ -3,6 +3,8 @@ const taskArea = document.getElementById("taskArea")
 /* Buttons */
 const nextTask = document.querySelector("#nextTask")
 const newTask = document.querySelector("#newTask")
+const uncompletedButton = document.querySelector("#uncompletedButton")
+const completedButton = document.querySelector("#completedButton")
 const dragBox = document.getElementById("flexCheckDrag")
 
 /* Empty task card */
@@ -37,12 +39,15 @@ const checkBox = newTaskContent.querySelector("#flexCheckDefault")
 const host = window.location.host
 const protocol = window.location.protocol
 
-var draggable = false
-var skip = 0
-var creatingTask = false
-var limit = 3
-var ids = []
-var newIds = []
+let draggable = false
+let completedTasks = false
+let uncompletedTasks = false
+let creatingTask = false
+let limit = 3
+let skip = 0
+let ids = []
+let newIds = []
+let url = `https://nbritton-api-app.herokuapp.com/tasks?skip=${skip}&limit=${limit}`
 
 function drag() {
   if (dragBox.checked == true) {
@@ -50,7 +55,6 @@ function drag() {
   } else {
     draggable = false
   }
-  console.log(draggable)
 }
 
 function exists(elem) {
@@ -64,7 +68,6 @@ function exists(elem) {
 
 function cancelModify(id) {
   const modifyCard = document.getElementById(`hidden-card_${id.split("_").pop()}`)
-  const modifiedCard = document.getElementById(`card_${id.split("_").pop()}`)
   modifyCard.id = `card-body_${id.split("_").pop()}`
   const updatedCard = document.getElementById(`card-body_${id.split("_").pop()}`)
   updatedCard.removeAttribute("style")
@@ -110,7 +113,7 @@ function modifiedTask(id) {
 async function submitModify(id) {
   const token = localStorage.getItem("token")
   const _id = id.split("_").pop()
-  const url = 'https://nbritton-api-app.herokuapp.com/tasks'
+  const api_url = 'https://nbritton-api-app.herokuapp.com/tasks'
 
   const modifiedCard = document.getElementById(`card_${id.split("_").pop()}`)
   const title = modifiedCard.querySelector("#titleInput").value
@@ -128,7 +131,7 @@ async function submitModify(id) {
     body: JSON.stringify(requestData),
   }
 
-  let response = await fetch(url, options)
+  let response = await fetch(api_url, options)
 
   if (response.status === 200) {
     modifiedTask(id)
@@ -140,7 +143,7 @@ async function submitModify(id) {
 async function deleteTask(id) {
   console.log(id)
   const token = localStorage.getItem("token")
-  const url = 'https://nbritton-api-app.herokuapp.com/tasks'
+  const api_url = 'https://nbritton-api-app.herokuapp.com/tasks'
   id = id.split("_").pop()
   const request = { _id: id }
 
@@ -153,7 +156,7 @@ async function deleteTask(id) {
     body: JSON.stringify(request),
   }
   console.log(options)
-  let response = await fetch(url, options)
+  let response = await fetch(api_url, options)
 
   if (response.ok) {
     if (response.status === 200) {
@@ -165,6 +168,46 @@ async function deleteTask(id) {
     console.log("HTTP-Error: " + response.status)
   }
 }
+
+uncompletedButton.addEventListener("click", function() {
+  uncompletedTasks = uncompletedTasks ? false : true
+  if (uncompletedTasks) {
+    completedTasks = false
+    completedButton.style = "background-color: #98dfea"
+    uncompletedButton.style = "background-color: #65969d"
+  } else {
+    uncompletedButton.style = "background-color: #98dfea"
+  }
+
+  taskArea.innerHTML = ""
+  skip = 0
+  if (uncompletedTasks) {
+    url = `https://nbritton-api-app.herokuapp.com/tasks?completed=false&skip=${skip}&limit=${limit}`
+  } else {
+    url = `https://nbritton-api-app.herokuapp.com/tasks?skip=${skip}&limit=${limit}`
+  }
+  initialLoad()
+})
+
+completedButton.addEventListener("click", function() {
+  completedTasks = completedTasks ? false : true;
+  if (completedTasks) {
+    uncompletedTasks = false
+    uncompletedButton.style = "background-color: #98dfea"
+    completedButton.style = "background-color: #65969d"
+  } else {
+    completedButton.style = "background-color: #98dfea"
+  }
+
+  taskArea.innerHTML = ""
+  skip = 0
+  if (completedTasks) {
+    url = `https://nbritton-api-app.herokuapp.com/tasks?completed=true&skip=${skip}&limit=${limit}`
+  } else {
+    url = `https://nbritton-api-app.herokuapp.com/tasks?skip=${skip}&limit=${limit}`
+  }
+  initialLoad()
+})
 
 newTask.addEventListener("click", function () {
   if (!creatingTask) {
@@ -192,7 +235,7 @@ async function submitNewTask() {
   const completed = document.getElementById("flexCheckDefault").checked
   let data = { title, description, completed }
 
-  const url = 'https://nbritton-api-app.herokuapp.com/tasks'
+  const api_url = 'https://nbritton-api-app.herokuapp.com/tasks'
 
   const options = {
     method: 'POST',
@@ -203,7 +246,7 @@ async function submitNewTask() {
     body: JSON.stringify(data)
   }
   console.log(options)
-  let response = await fetch(url, options)
+  let response = await fetch(api_url, options)
 
   if (response.ok) {
     if (response.status === 201) {
@@ -239,9 +282,9 @@ async function submitNewTask() {
 
 async function initialLoad() {
   const token = localStorage.getItem("token")
-  const url = `https://nbritton-api-app.herokuapp.com/tasks?skip=${skip}&limit=${limit}`
-
-  console.log(url)
+  skip = 0
+  ids = []
+  newIds = []
   const options = {
     method: "GET",
     headers: {
@@ -256,6 +299,7 @@ async function initialLoad() {
     if (response.status === 200) {
       const data = await response.json()
       for (let i = 0; i < 3; i++) {
+        checkBoxHolder.innerHTML = ""
         taskTitle.innerHTML = `${data[i].title}`
         taskDesc.innerHTML = `${data[i].description}`
         taskID.innerHTML = `${data[i]._id}`
@@ -284,11 +328,16 @@ async function initialLoad() {
 
 nextTask.addEventListener("click", async (e) => {
   e.preventDefault()
-
+  if (uncompletedTasks) {
+    url = `https://nbritton-api-app.herokuapp.com/tasks?completed=false&skip=${skip}&limit=${limit}`
+  } else if (completedTasks) {
+    url = `https://nbritton-api-app.herokuapp.com/tasks?completed=true&skip=${skip}&limit=${limit}`
+  } else {
+    url = `https://nbritton-api-app.herokuapp.com/tasks?skip=${skip}&limit=${limit}`
+  }
+  console.log(url)
   const token = localStorage.getItem("token")
 
-  const url = `https://nbritton-api-app.herokuapp.com/tasks?skip=${skip}&limit=${limit}`
-  console.log(url)
   const options = {
     method: "GET",
     headers: {
@@ -298,7 +347,6 @@ nextTask.addEventListener("click", async (e) => {
 
   let response = await fetch(url, options)
   const data = await response.json()
-  console.log(data)
   for (let i = 0; i < 3; i++) {
     if (!(ids.includes(data[i]._id))) {
       if (!(newIds.includes(data[i]._id))) {
@@ -331,49 +379,53 @@ nextTask.addEventListener("click", async (e) => {
   skip += 3
 })
 
+function offset(el) {
+  var rect = el.getBoundingClientRect(),
+  scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+  scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+}
+
 function makeDraggable(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  var elmntOffset = offset(elmnt)
+  elmnt.style.position = "absolute"
+  elmnt.style.top = elmntOffset.top + "px";
+  elmnt.style.left = elmntOffset.left + "px";
   if (document.getElementById(elmnt.id + "header")) {
-    // if present, the header is where you move the DIV from:
     document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
   } else {
-    // otherwise, move the DIV from anywhere inside the DIV:
     elmnt.onmousedown = dragMouseDown;
   }
 
   function dragMouseDown(e) {
     e = e || window.event;
     e.preventDefault();
-    elmnt.style.position = "absolute"
-    // get the mouse cursor position at startup:
     pos3 = e.clientX;
     pos4 = e.clientY;
     document.onmouseup = closeDragElement;
-    // call a function whenever the cursor moves:
     document.onmousemove = elementDrag;
   }
 
   function elementDrag(e) {
     e = e || window.event;
     e.preventDefault();
-    // calculate the new cursor position:
     pos1 = pos3 - e.clientX;
     pos2 = pos4 - e.clientY;
     pos3 = e.clientX;
     pos4 = e.clientY;
-    // set the element's new position:
     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
   }
 
   function closeDragElement() {
-    // stop moving when mouse button is released:
     document.onmouseup = null;
     document.onmousemove = null;
   }
 }
 
 taskArea.addEventListener('click', function (e) {
+  console.log(e.target.id)
   if (e.target.classList.contains('cancelTask')) {
     cancelTask()
   }
@@ -395,12 +447,12 @@ taskArea.addEventListener('click', function (e) {
   if (document.querySelector("#flexCheckDrag") != null) {
     drag()
   }
-  if (e.target.className=== "form-control") {
+  if (e.target.className === "form-control") {
     e.target.focus()
   }
-    if (draggable == true) {
-      if (e.target.classList.contains('card')) {
-        makeDraggable(e.target)
-      }
+  if (draggable == true) {
+    if (e.target.classList.contains('card')) {
+      makeDraggable(e.target)
     }
+  }
 })

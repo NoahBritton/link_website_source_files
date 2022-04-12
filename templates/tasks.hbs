@@ -9,19 +9,22 @@
   {{> head}}
   <link href="css/tasks.css" rel="stylesheet" type="text/css">
   <script defer src="js/tasks.js"></script>
-  <script defer src="js/dragDiv.js"></script>
   <title>Tasks</title>
 </head>
 
 <body onload="initialLoad()">
   {{> header}}
   <main role="main" class="container">
-    <button style="background-color:rgb(47, 223, 71)" type="button" id="newTask">New Task</button>
-    <button style="background-color:rgb(47, 188, 223)" type="button" id="nextTask">Load Next</button>
+    <button style="background-color: #F7A9A8" type="button" id="newTask">New Task</button>
+    <button style="background-color: #33658A" type="button" id="nextTask">Load Next</button>
+    <button style="background-color: #98dfea" type="button" id="completedButton">Completed Tasks</button>
+    <button style="background-color: #98dfea" type="button" id="uncompletedButton">Uncompleted Tasks</button>
     <div class="form-check">
       <input class="form-check-input" type="checkbox" value="" id="flexCheckDrag">
-      <label class="form-check-label" for="flexCheckDefault">
-        Draggable Tasks (buggy)
+      <label class="form-check-label" for="flexCheckDrag">
+        Draggable Tasks </br>
+        <p>Kinda buggy, double click black edge of bottom-most task to make it draggable. </br>
+        If you double click any other task it will become hidden behind the one in front of it </p>
       </label>
     </div>
     <div id="taskArea"></div>

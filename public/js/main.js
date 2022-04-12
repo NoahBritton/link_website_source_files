@@ -5,6 +5,8 @@ const modifyAccountModalSaveButton = document.querySelector("#modifyAccountModal
 const protocol = window.location.protocol
 const host = window.location.host
 
+loadAvatar()
+
 displayAccountItem.addEventListener("click", async(e) => {
     e.preventDefault()
 
@@ -130,3 +132,62 @@ modifyAccountModalSaveButton.addEventListener("click", async(e) => {
 
     const form = document.querySelector("#modifyAccountForm").reset()
 })
+
+async function uploadAvatar() {
+    const token = localStorage.getItem("token")
+
+    const url = 'https://nbritton-api-app.herokuapp.com/users/me'
+    
+    const input = document.querySelector("#avatarInput")
+
+    const formData = new FormData();
+    formData.append('avatar', input.files[0]);
+
+    const options = {
+        method: "POST",
+        body: formData,
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+
+    let response = await fetch(url, options)
+
+    if (response.status === 200) {
+        console.log("upload successful")
+    } else {
+        console.log("Error uploading avatar: " + response.status)
+    }
+}
+
+async function loadAvatar() {
+    const token = localStorage.getItem("token")
+
+    const url = 'https://nbritton-api-app.herokuapp.com/users/me'
+
+    const options = {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+
+    let response = await fetch(url, options)
+
+    if (response.status === 200) {
+        
+        const imageBlob = await response.blob()
+        const imageObjectURL = URL.createObjectURL(imageBlob);
+
+        const image = document.createElement('img')
+        image.src = imageObjectURL
+        image.className = 'profile-pic'
+
+        const container = document.getElementById("pfpBox")
+        container.innerHTML = ""
+        container.prepend(image)
+    }
+    else {
+        console.log("HTTP-Error: " + response.status)
+    }
+}
