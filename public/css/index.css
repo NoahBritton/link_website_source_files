@@ -154,3 +154,12 @@ body>.container {
 #accEmail {
   margin-left: 7px;
 }
+
+.pfpBox {
+  margin-right: 20px;
+}
+
+.profile-pic {
+  max-width: 40px;
+  border-radius: 50%; border: 1px solid;
+}
