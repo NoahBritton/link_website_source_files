@@ -136,7 +136,7 @@ modifyAccountModalSaveButton.addEventListener("click", async(e) => {
 async function uploadAvatar() {
     const token = localStorage.getItem("token")
 
-    const url = 'https://nbritton-api-app.herokuapp.com/users/me'
+    const url = 'https://nbritton-api-app.herokuapp.com/users/me/avatar'
     
     const input = document.querySelector("#avatarInput")
 
@@ -163,7 +163,7 @@ async function uploadAvatar() {
 async function loadAvatar() {
     const token = localStorage.getItem("token")
 
-    const url = 'https://nbritton-api-app.herokuapp.com/users/me'
+    const url = 'https://nbritton-api-app.herokuapp.com/users/me/avatar'
 
     const options = {
         method: "GET",
