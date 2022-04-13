@@ -456,3 +456,36 @@ taskArea.addEventListener('click', function (e) {
     }
   }
 })
+
+
+async function loadAvatar() {
+  const token = localStorage.getItem("token")
+
+  const url = 'https://nbritton-api-app.herokuapp.com/users/me/avatar'
+
+  const options = {
+      method: "GET",
+      headers: {
+          Authorization: `Bearer ${token}`
+      }
+  }
+
+  let response = await fetch(url, options)
+
+  if (response.status === 200) {
+      
+      const imageBlob = await response.blob()
+      const imageObjectURL = URL.createObjectURL(imageBlob);
+
+      const image = document.createElement('img')
+      image.src = imageObjectURL
+      image.className = 'profile-pic'
+
+      const container = document.getElementById("pfpBox")
+      container.innerHTML = ""
+      container.prepend(image)
+  }
+  else {
+      console.log("HTTP-Error: " + response.status)
+  }
+}
