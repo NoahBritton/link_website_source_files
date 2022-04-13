@@ -155,6 +155,7 @@ async function uploadAvatar() {
 
     if (response.status === 200) {
         console.log("upload successful")
+        loadAvatar()
     } else {
         console.log("Error uploading avatar: " + response.status)
     }

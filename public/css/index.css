@@ -163,3 +163,8 @@ body>.container {
   max-width: 40px;
   border-radius: 50%; border: 1px solid;
 }
+
+.carousel.slide {
+  background-repeat: no-repeat;
+  background-size: cover
+}
